@@ -18,13 +18,14 @@ namespace timerunner
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Vector2 mPosition = new Vector2(250, 100);
-        Texture2D mSpriteTexture;
+        Player firstPlayerSprite;
+       
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+     
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace timerunner
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
         }
 
@@ -50,7 +51,7 @@ namespace timerunner
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            mSpriteTexture = this.Content.Load<Texture2D>("Abaddon");
+            firstPlayerSprite.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace timerunner
                 this.Exit();
 
             // TODO: Add your update logic here
+            firstPlayerSprite.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -84,12 +86,11 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
             spriteBatch.Begin();
-            spriteBatch.Draw(mSpriteTexture, mPosition, Color.White);
+            firstPlayerSprite.Draw(this.spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
