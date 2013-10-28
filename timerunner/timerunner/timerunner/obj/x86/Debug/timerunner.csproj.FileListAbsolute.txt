@@ -5,3 +5,15 @@ C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.exe
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.pdb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.csprojResolveAssemblyReference.cache
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb
+C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb

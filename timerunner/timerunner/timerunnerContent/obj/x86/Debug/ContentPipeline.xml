@@ -7,8 +7,53 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb</Output>
-      <Time>2013-10-23T19:33:57.2870613-05:00</Time>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb</Output>
+      <Time>2013-10-28T11:09:01.5691677-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Background01.png</Source>
+      <Name>Background01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb</Output>
+      <Time>2013-10-28T11:21:18.8493377-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Background02.png</Source>
+      <Name>Background02</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb</Output>
+      <Time>2013-10-28T11:21:18.837337-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Background03.png</Source>
+      <Name>Background03</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb</Output>
+      <Time>2013-10-28T11:21:18.8403372-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Background04.png</Source>
+      <Name>Background04</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb</Output>
+      <Time>2013-10-28T11:21:18.8433373-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Background05.png</Source>
+      <Name>Background05</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb</Output>
+      <Time>2013-10-28T11:21:18.8463375-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -16,10 +61,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -48,7 +93,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-10-23T19:09:45.1230023-05:00</Value>
+        <Value>2013-10-28T10:32:16.9316687-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

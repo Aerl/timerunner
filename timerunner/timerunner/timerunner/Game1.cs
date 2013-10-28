@@ -18,6 +18,10 @@ namespace timerunner
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        //Create a Horizontally scrolling background
+        HorizontallyScrollingBackground mScrollingBackground;
+
         Player firstPlayerSprite;
        
 
@@ -52,6 +56,16 @@ namespace timerunner
 
             // TODO: use this.Content to load your game content here
             firstPlayerSprite.LoadContent(this.Content);
+
+            mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
+            mScrollingBackground.AddBackground("Background01");
+            mScrollingBackground.AddBackground("Background02");
+            mScrollingBackground.AddBackground("Background03");
+            mScrollingBackground.AddBackground("Background04");
+            mScrollingBackground.AddBackground("Background05");
+
+            //Load the content for the Scrolling background
+            mScrollingBackground.LoadContent(this.Content);
         }
 
         /// <summary>
@@ -77,6 +91,9 @@ namespace timerunner
             // TODO: Add your update logic here
             firstPlayerSprite.Update(gameTime);
 
+            //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
+            mScrollingBackground.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
+
             base.Update(gameTime);
         }
 
@@ -90,7 +107,9 @@ namespace timerunner
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            mScrollingBackground.Draw(spriteBatch);
             firstPlayerSprite.Draw(this.spriteBatch);
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
