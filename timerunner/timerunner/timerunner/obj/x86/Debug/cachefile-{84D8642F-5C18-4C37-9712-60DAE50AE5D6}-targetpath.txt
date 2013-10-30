@@ -4,3 +4,4 @@ Content\Background02.xnb
 Content\Background03.xnb
 Content\Background04.xnb
 Content\Background05.xnb
+Content\walrus.xnb

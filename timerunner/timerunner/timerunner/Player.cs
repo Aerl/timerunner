@@ -25,7 +25,9 @@ namespace timerunner
         enum State
         {
             Walking,
-            Jumping
+            Jumping,
+            Melee,
+            Firing
         }
         State mCurrentState = State.Walking;
 

@@ -23,6 +23,7 @@ namespace timerunner
         HorizontallyScrollingBackground mScrollingBackground;
 
         Player firstPlayerSprite;
+        Monster monsterTrial;
        
 
         public Game1()
@@ -42,6 +43,7 @@ namespace timerunner
         {
             // TODO: Add your initialization logic here
             firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            monsterTrial = new Monster(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             base.Initialize();
         }
 
@@ -56,6 +58,7 @@ namespace timerunner
 
             // TODO: use this.Content to load your game content here
             firstPlayerSprite.LoadContent(this.Content);
+            monsterTrial.LoadContent(this.Content);
 
             mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
             mScrollingBackground.AddBackground("Background01");
@@ -90,6 +93,7 @@ namespace timerunner
 
             // TODO: Add your update logic here
             firstPlayerSprite.Update(gameTime);
+            monsterTrial.Update(gameTime);
 
             //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
             mScrollingBackground.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
@@ -109,6 +113,7 @@ namespace timerunner
             spriteBatch.Begin();
             mScrollingBackground.Draw(spriteBatch);
             firstPlayerSprite.Draw(this.spriteBatch);
+            monsterTrial.Draw(this.spriteBatch);
             
             spriteBatch.End();
 
