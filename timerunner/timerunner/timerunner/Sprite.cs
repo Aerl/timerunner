@@ -47,7 +47,7 @@ namespace timerunner
         }
 
         //Draw the sprite to the screen
-        public void Draw(SpriteBatch theSpriteBatch)
+        public virtual void Draw(SpriteBatch theSpriteBatch)
         {
             theSpriteBatch.Draw(mSpriteTexture, Position,
                 new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height),

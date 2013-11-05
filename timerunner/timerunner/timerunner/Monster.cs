@@ -23,7 +23,7 @@ namespace timerunner
         const int MOVE_RIGHT = 1;
 
         const int BOT_DIST = 50;
-        Vector2 mStartingPosition = new Vector2(800,300);
+        Vector2 mStartingPosition = new Vector2(1000,300);
 
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
@@ -32,7 +32,7 @@ namespace timerunner
         {
             //Position = new Vector2(WindowWidth, WindowHeight);
         }
-
+        
         enum State
         {
             Walking,

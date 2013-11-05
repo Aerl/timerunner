@@ -13,14 +13,16 @@ namespace timerunner
     class Player : Sprite
     {
         const string PLAYER_ASSETNAME = "Abaddon";
-        const int PLAYER_SPEED = 160;
-        const int MAX_JUMP_HEIGHT = 150;
+        const int PLAYER_SPEED = 300;
+        const int MAX_JUMP_HEIGHT = 200;
         const int MOVE_UP = -1;
         const int MOVE_DOWN = 1;
         //const int MOVE_LEFT = -1;
         //const int MOVE_RIGHT = 1;
         const int BOT_DIST = 50;
         Vector2 mStartingPosition = Vector2.Zero;
+        List<Fireball> mFireballs = new List<Fireball>();
+        ContentManager mContentManager;
 
         enum State
         {
@@ -42,8 +44,23 @@ namespace timerunner
             Position = new Vector2(WindowWidth, WindowHeight);
         }
 
+        public override void Draw(SpriteBatch theSpriteBatch)
+        {
+            foreach (Fireball aFireball in mFireballs)
+            {
+                aFireball.Draw(theSpriteBatch);
+            }
+            base.Draw(theSpriteBatch);
+        }
+
         public void LoadContent(ContentManager theContentManager)
         {
+            mContentManager = theContentManager;
+
+            foreach (Fireball aFireball in mFireballs)
+            {
+                aFireball.LoadContent(theContentManager);
+            }
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
             Position = new Vector2((Position.X - (mSpriteTexture.Width)) / 2, Position.Y - mSpriteTexture.Height - BOT_DIST);
                   
@@ -55,6 +72,7 @@ namespace timerunner
 
             UpdateMovement(aCurrentKeyboardState);
             UpdateJump(aCurrentKeyboardState);
+            UpdateFireball(theGameTime, aCurrentKeyboardState);
 
             mPreviousKeyboardState = aCurrentKeyboardState;
 
@@ -65,7 +83,7 @@ namespace timerunner
         {
             if (mCurrentState == State.Walking)
             {
-                if (aCurrentKeyboardState.IsKeyDown(Keys.Space) == true && mPreviousKeyboardState.IsKeyDown(Keys.Space) == false)
+                if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true && mPreviousKeyboardState.IsKeyDown(Keys.Up) == false)
                 {
                     Jump();
                 }
@@ -96,6 +114,44 @@ namespace timerunner
                 mDirection.Y = MOVE_UP;
                 mSpeed = new Vector2(PLAYER_SPEED, PLAYER_SPEED);
             }
+        }
+
+        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState)
+        {
+            foreach (Fireball aFireball in mFireballs)
+            {
+                aFireball.Update(theGameTime);
+            }
+
+            if (aCurrentKeyboardState.IsKeyDown(Keys.Space) == true && mPreviousKeyboardState.IsKeyDown(Keys.Space) == false)
+            {
+                ShootFireball();
+            }
+        }
+
+        private void ShootFireball()
+        {
+            
+                bool aCreateNew = true;
+                foreach (Fireball aFireball in mFireballs)
+                {
+                    if (aFireball.Visible == false)
+                    {
+                        aCreateNew = false;
+                        aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
+                            new Vector2(200, 0), new Vector2(1, 0));
+                        break;
+                    }
+                }
+
+                if (aCreateNew == true)
+                {
+                    Fireball aFireball = new Fireball();
+                    aFireball.LoadContent(mContentManager);
+                    aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
+                        new Vector2(200, 200), new Vector2(1, 0));
+                    mFireballs.Add(aFireball);
+                }
         }
 
         private void UpdateMovement(KeyboardState aCurrentKeyboardState)

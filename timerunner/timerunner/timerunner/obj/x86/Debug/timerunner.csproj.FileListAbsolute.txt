@@ -30,3 +30,10 @@ C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
