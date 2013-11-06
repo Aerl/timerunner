@@ -24,13 +24,16 @@ namespace timerunner
 
         Player firstPlayerSprite;
         Monster monsterTrial;
-       
+        List<Platform> platforms = new List<Platform>();
+        SpriteFont font;
+
+        //Sound
+        Song backgroundSong;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-     
         }
 
         /// <summary>
@@ -55,7 +58,7 @@ namespace timerunner
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            font = Content.Load<SpriteFont>("Arial");
             // TODO: use this.Content to load your game content here
             firstPlayerSprite.LoadContent(this.Content);
             monsterTrial.LoadContent(this.Content);
@@ -69,6 +72,17 @@ namespace timerunner
 
             //Load the content for the Scrolling background
             mScrollingBackground.LoadContent(this.Content);
+
+            //Load the content for the platform
+            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(30, 400)));
+            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(350, 300)));
+            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(700, 350)));
+
+            //Load sound effect
+            backgroundSong = Content.Load<Song>("Song");
+
+            MediaPlayer.Play(backgroundSong);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -88,7 +102,6 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -108,6 +121,13 @@ namespace timerunner
             //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
             mScrollingBackground.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
 
+            //foreach (Platform platform in platforms)
+            //    if (firstPlayerSprite.rectangle.isOnTopOf(platform.rectangle))
+            //    {
+            //        firstPlayerSprite.velocity.Y = 0f;
+            //        firstPlayerSprite.hasJumped = false;
+            //    }
+
             base.Update(gameTime);
         }
 
@@ -125,12 +145,17 @@ namespace timerunner
 
             // TODO: Add your drawing code hereC:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\Game1.cs
             spriteBatch.Begin();
-            mScrollingBackground.Draw(spriteBatch);
+            mScrollingBackground.Draw(spriteBatch);            
+            foreach (Platform platform in platforms)
+                platform.Draw(spriteBatch);
+
             firstPlayerSprite.Draw(this.spriteBatch);
             monsterTrial.Draw(this.spriteBatch);
+           
+            //Kimi: For debug purpose
+            spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
             
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
 
@@ -153,5 +178,18 @@ namespace timerunner
 
             return false;
         }
-    }
+
+
+    }        
+        //static class RectangleHelper
+        //{
+        //    const int penetrationMargin = 5;
+        //    public static bool isOnTopOf(this Rectangle r1, Rectangle r2)
+        //    {
+        //        return (r1.Bottom >= r2.Top - penetrationMargin &&
+        //            r1.Bottom <= r2.Top + 1 &&
+        //            r1.Right >= r2.Left + 5 &&
+        //            r1.Left <= r2.Right - 5);
+        //    }
+        //}
 }

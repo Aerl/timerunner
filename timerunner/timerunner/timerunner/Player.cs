@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace timerunner
 {
@@ -24,6 +25,9 @@ namespace timerunner
         List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
 
+        //Sound
+        SoundEffect shootSound;
+
         enum State
         {
             Walking,
@@ -40,8 +44,8 @@ namespace timerunner
 
         public Player(int WindowWidth, int WindowHeight)
         {
-
             Position = new Vector2(WindowWidth, WindowHeight);
+            this.mCurrentState = State.Walking;
         }
 
         public override void Draw(SpriteBatch theSpriteBatch)
@@ -63,7 +67,9 @@ namespace timerunner
             }
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
             Position = new Vector2((Position.X - (texture.Width)) / 2, Position.Y - texture.Height - BOT_DIST);
-                  
+
+            //Load sound effect
+            shootSound = theContentManager.Load<SoundEffect>("Effect");
         }
 
         public void Update(GameTime theGameTime)
@@ -126,6 +132,7 @@ namespace timerunner
             if (aCurrentKeyboardState.IsKeyDown(Keys.Space) == true && mPreviousKeyboardState.IsKeyDown(Keys.Space) == false)
             {
                 ShootFireball();
+                shootSound.Play();
             }
         }
 
