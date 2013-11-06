@@ -76,15 +76,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="walrus.jpg">
+    <Compile Include="Fireball.png">
+      <Name>Fireball</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="walrus.png">
       <Name>walrus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fireball.png">
-      <Name>Fireball</Name>
+    <Compile Include="knight.png">
+      <Name>knight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

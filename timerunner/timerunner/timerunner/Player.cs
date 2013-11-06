@@ -12,7 +12,7 @@ namespace timerunner
 {
     class Player : Sprite
     {
-        const string PLAYER_ASSETNAME = "Abaddon";
+        const string PLAYER_ASSETNAME = "knight";
         const int PLAYER_SPEED = 300;
         const int MAX_JUMP_HEIGHT = 200;
         const int MOVE_UP = -1;
@@ -62,7 +62,7 @@ namespace timerunner
                 aFireball.LoadContent(theContentManager);
             }
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
-            Position = new Vector2((Position.X - (mSpriteTexture.Width)) / 2, Position.Y - mSpriteTexture.Height - BOT_DIST);
+            Position = new Vector2((Position.X - (texture.Width)) / 2, Position.Y - texture.Height - BOT_DIST);
                   
         }
 

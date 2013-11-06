@@ -80,6 +80,7 @@ namespace timerunner
             // TODO: Unload any non ContentManager content here
         }
 
+        bool touched;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -87,9 +88,18 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            if (IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData,
+                monsterTrial.Size, monsterTrial.textureData))
+            {
+                touched = true;
+            }
+            else
+                touched = false;
 
             // TODO: Add your update logic here
             firstPlayerSprite.Update(gameTime);
@@ -107,9 +117,13 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            
+            if (touched)
+                graphics.GraphicsDevice.Clear(Color.Red);
+            else
+                graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            // TODO: Add your drawing code hereC:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\Game1.cs
             spriteBatch.Begin();
             mScrollingBackground.Draw(spriteBatch);
             firstPlayerSprite.Draw(this.spriteBatch);
@@ -118,6 +132,26 @@ namespace timerunner
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        static bool IntersectPixel(Rectangle rect1, Color[] data1, Rectangle rect2, Color[] data2)
+        {
+            int top = Math.Max(rect1.Top, rect2.Top);
+            int bottom = Math.Min(rect1.Bottom, rect2.Bottom);
+            int left = Math.Max(rect1.Left, rect2.Left);
+            int right = Math.Min(rect1.Right, rect2.Right);
+
+            for(int y = top; y<bottom; y++)
+                for (int x = left; x < right; x++)
+                {
+                        Color c1 = data1[(x - rect1.Left) + (y - rect1.Top) * rect1.Width];
+                        Color c2 = data2[(x - rect2.Left) + (y - rect2.Top) * rect2.Width];
+
+                        if (c1.A != 0 && c2.A != 0)
+                            return true;
+                }
+
+            return false;
         }
     }
 }

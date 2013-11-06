@@ -23,7 +23,9 @@ namespace timerunner
         public Vector2 Position = new Vector2(0, 0);
 
         //The texture object used when drawing the sprite
-        public Texture2D mSpriteTexture;
+        public Texture2D texture;
+
+        public Color[] textureData;
 
         //When the scale is modified throught he property, the Size of the 
         //sprite is recalculated with the new scale applied.
@@ -34,23 +36,27 @@ namespace timerunner
             {
                 mScale = value;
                 //Recalculate the Size of the Sprite with the new scale
-                Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
+                Size = new Rectangle((int)Position.X, (int)Position.Y, (int)(texture.Width * Scale), (int)(texture.Height * Scale));
+                
             }
         }
 
         //Load the texture for the sprite using the Content Pipeline
         public void LoadContent(ContentManager theContentManager, string theAssetName)
         {
-            mSpriteTexture = theContentManager.Load<Texture2D>(theAssetName);
+            texture = theContentManager.Load<Texture2D>(theAssetName);
             AssetName = theAssetName;
-            Size = new Rectangle(0, 0, (int)(mSpriteTexture.Width * Scale), (int)(mSpriteTexture.Height * Scale));
+            Size = new Rectangle((int)Position.X, (int)Position.Y, (int)(texture.Width * Scale), (int)(texture.Height * Scale));
+            //Creates an array of pixels
+            textureData = new Color[texture.Width * texture.Height];
+            texture.GetData(textureData);
         }
 
         //Draw the sprite to the screen
         public virtual void Draw(SpriteBatch theSpriteBatch)
         {
-            theSpriteBatch.Draw(mSpriteTexture, Position,
-                new Rectangle(0, 0, mSpriteTexture.Width, mSpriteTexture.Height),
+            theSpriteBatch.Draw(texture, Position,
+                new Rectangle(0, 0, texture.Width, texture.Height),
                 Color.White, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
         }
 
@@ -58,6 +64,10 @@ namespace timerunner
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)
         {
             Position += theDirection * theSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            Size.X = Convert.ToInt32(Position.X);
+            Size.Y = Convert.ToInt32(Position.Y);
         }
+
+
     }
 }

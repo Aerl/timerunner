@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb</Output>
-      <Time>2013-10-30T17:11:28.9582594-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb</Output>
+      <Time>2013-10-30T11:07:11.2452871-05:00</Time>
     </Item>
     <Item>
       <Source>Background01.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb</Output>
-      <Time>2013-10-30T17:11:28.9602595-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb</Output>
+      <Time>2013-10-30T11:07:11.2452871-05:00</Time>
     </Item>
     <Item>
       <Source>Background02.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb</Output>
-      <Time>2013-10-30T17:11:28.9652598-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb</Output>
+      <Time>2013-10-30T11:07:11.2582879-05:00</Time>
     </Item>
     <Item>
       <Source>Background03.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb</Output>
-      <Time>2013-10-30T17:11:28.9662599-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb</Output>
+      <Time>2013-10-30T11:07:11.2582879-05:00</Time>
     </Item>
     <Item>
       <Source>Background04.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb</Output>
-      <Time>2013-10-30T17:11:28.96826-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb</Output>
+      <Time>2013-10-30T11:07:11.2592879-05:00</Time>
     </Item>
     <Item>
       <Source>Background05.png</Source>
@@ -52,17 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb</Output>
-      <Time>2013-10-30T17:11:28.9702601-05:00</Time>
-    </Item>
-    <Item>
-      <Source>walrus.jpg</Source>
-      <Name>walrus</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb</Output>
-      <Time>2013-10-30T17:11:28.9902612-05:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb</Output>
+      <Time>2013-10-30T11:07:11.2592879-05:00</Time>
     </Item>
     <Item>
       <Source>Fireball.png</Source>
@@ -70,8 +61,26 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb</Output>
-      <Time>2013-11-05T15:53:27.9602677-06:00</Time>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb</Output>
+      <Time>2013-11-05T18:40:54.6492807-06:00</Time>
+    </Item>
+    <Item>
+      <Source>walrus.png</Source>
+      <Name>walrus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb</Output>
+      <Time>2013-11-05T18:50:10.61208-06:00</Time>
+    </Item>
+    <Item>
+      <Source>knight.png</Source>
+      <Name>knight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\knight.xnb</Output>
+      <Time>2013-11-05T19:31:07.3986001-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -79,10 +88,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunnerContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -110,8 +119,8 @@
         <Value>2010-08-23T12:41:18-05:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-10-23T19:09:45.1230023-05:00</Value>
+        <Key>C:\windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2013-10-30T11:01:22.6773502-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
