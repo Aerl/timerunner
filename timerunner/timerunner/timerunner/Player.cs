@@ -41,8 +41,8 @@ namespace timerunner
         }
         
         //Initialize Player Entity
-        State mCurrentState = State.Walking;
-        Vector2 mDirection = Vector2.Zero;
+        State mCurrentState = State.Falling;
+        Vector2 mDirection = new Vector2(0, -1);
         Vector2 mSpeed = Vector2.Zero;
         KeyboardState mPreviousKeyboardState;
 
@@ -74,7 +74,7 @@ namespace timerunner
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
 
             // Set starting position for Player 
-            Position = new Vector2(((Position.X/2) - (texture.Width)) / 2, Position.Y - texture.Height - BOT_DIST);
+            Position = new Vector2(((Position.X/2) - (texture.Width)-40) / 2, Position.Y - texture.Height - BOT_DIST);
 
             //Load sound effect
             shootSound = theContentManager.Load<SoundEffect>("Effect");
@@ -83,6 +83,7 @@ namespace timerunner
         public void Update(GameTime theGameTime, bool intersects)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
+            mSpeed = new Vector2(PLAYER_SPEED, PLAYER_SPEED);
             UpdateFalling(intersects);
             UpdateJump(aCurrentKeyboardState);
             UpdateFireball(theGameTime, aCurrentKeyboardState);
@@ -99,7 +100,7 @@ namespace timerunner
                 if (intersects)
                 {
                     mCurrentState = State.Walking;
-                    mDirection.Y = 0;
+                    mDirection = Vector2.Zero;
                 }
                 else
                 {
@@ -117,6 +118,10 @@ namespace timerunner
                 if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true && mPreviousKeyboardState.IsKeyDown(Keys.Up) == false)
                 {
                     Jump();
+                }
+                else
+                {
+                    mCurrentState = State.Falling;
                 }
             }
 
@@ -144,7 +149,6 @@ namespace timerunner
                 mCurrentState = State.Jumping;
                 mStartingPosition = Position;
                 mDirection.Y = MOVE_UP;
-                mSpeed = new Vector2(PLAYER_SPEED, PLAYER_SPEED);
             }
         }
 

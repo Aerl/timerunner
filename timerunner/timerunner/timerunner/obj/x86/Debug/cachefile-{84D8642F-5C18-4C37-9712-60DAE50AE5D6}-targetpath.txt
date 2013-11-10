@@ -1,4 +1,3 @@
-Content\Abaddon.xnb
 Content\Fireball.xnb
 Content\walrus.xnb
 Content\knight.xnb

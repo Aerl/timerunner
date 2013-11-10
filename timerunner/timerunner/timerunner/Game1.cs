@@ -32,7 +32,7 @@ namespace timerunner
 
         // Player and Window Constants
         const float PLAYER_JUMP_HEIGHT = 300;
-        const float PLAYER_INIT_HEIGHT = 10;
+        const float PLAYER_INIT_HEIGHT = 500;
         const int WINDOW_HEIGHT = 700;
         const int WINDOW_WIDTH = 1000;
 
@@ -147,6 +147,9 @@ namespace timerunner
             firstPlayerSprite.Update(gameTime, intersectsPlatform);
 
             monsterTrial.Update(gameTime);
+
+            foreach (Platform platform in platforms)
+                platform.Update(gameTime);
 
             //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
             mScrollingBackground.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);

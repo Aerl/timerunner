@@ -42,13 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abaddon.jpg">
-      <Name>Abaddon</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Fireball.png">
       <Name>Fireball</Name>
       <Importer>TextureImporter</Importer>

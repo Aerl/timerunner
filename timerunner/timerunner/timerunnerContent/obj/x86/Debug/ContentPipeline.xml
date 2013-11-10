@@ -2,15 +2,6 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
-      <Source>Abaddon.jpg</Source>
-      <Name>Abaddon</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb</Output>
-      <Time>2013-10-30T17:11:28.9582594-05:00</Time>
-    </Item>
-    <Item>
       <Source>Fireball.png</Source>
       <Name>Fireball</Name>
       <Importer>TextureImporter</Importer>

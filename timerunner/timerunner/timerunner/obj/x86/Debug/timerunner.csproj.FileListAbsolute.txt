@@ -4,7 +4,6 @@ C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
-C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.exe
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.pdb
