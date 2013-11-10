@@ -4,27 +4,36 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace timerunner
 {
-    class Platform
+    class Platform : Sprite
     {
-        Texture2D texture;
-        Vector2 position;
-        public Rectangle rectangle;
+        ContentManager mContentManager;
+        string Platform_ASSETNAME = ""; // texture name is set in constructor
+        float Platform_SPEED = 0; // can be used to move platforms, but not implemented yet
 
-        public Platform(Texture2D newTexture, Vector2 newPosition)
+        public Platform(String Asset, Vector2 newPosition)
         {
-            texture = newTexture;
-            position = newPosition;
+            //Constructor requires 2-Elementvector and texturename
+            Platform_ASSETNAME = Asset;
+            Position = newPosition;
 
-            rectangle = new Rectangle((int)position.X, (int)position.Y,
-                texture.Width, texture.Height);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void LoadContent(ContentManager theContentManager)
         {
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            mContentManager = theContentManager;
+
+            // Load texture
+            base.LoadContent(theContentManager, Platform_ASSETNAME);
+
+        }
+
+        public override void Draw(SpriteBatch theSpriteBatch)
+        {
+            base.Draw(theSpriteBatch);
         }
     }
 }

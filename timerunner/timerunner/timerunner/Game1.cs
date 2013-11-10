@@ -30,9 +30,18 @@ namespace timerunner
         //Sound
         Song backgroundSong;
 
+        // Player and Window Constants
+        const float PLAYER_JUMP_HEIGHT = 300;
+        const float PLAYER_INIT_HEIGHT = 10;
+        const int WINDOW_HEIGHT = 700;
+        const int WINDOW_WIDTH = 1000;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+            graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             Content.RootDirectory = "Content";
         }
 
@@ -44,9 +53,17 @@ namespace timerunner
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            // Initialize Player
+            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT);
+            
+            // Initialize Monters
             monsterTrial = new Monster(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+         
+            // Initialize Platforms
+            platforms.Add(new Platform("Platform", new Vector2(30, 400)));
+            platforms.Add(new Platform("Platform", new Vector2(350, 300)));
+            platforms.Add(new Platform("Platform", new Vector2(700, 350)));
+           
             base.Initialize();
         }
 
@@ -59,24 +76,30 @@ namespace timerunner
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Arial");
-            // TODO: use this.Content to load your game content here
+
+            // Load Playercontent
             firstPlayerSprite.LoadContent(this.Content);
+
+            // Load Monstercontent
             monsterTrial.LoadContent(this.Content);
 
             mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
-            mScrollingBackground.AddBackground("Background01");
-            mScrollingBackground.AddBackground("Background02");
-            mScrollingBackground.AddBackground("Background03");
-            mScrollingBackground.AddBackground("Background04");
-            mScrollingBackground.AddBackground("Background05");
+            //mScrollingBackground.AddBackground("Background01");
+            //mScrollingBackground.AddBackground("Background02");
+            //mScrollingBackground.AddBackground("Background03");
+            //mScrollingBackground.AddBackground("Background04");
+            //mScrollingBackground.AddBackground("Background05");
+            mScrollingBackground.AddBackground("sunrise");
+            mScrollingBackground.AddBackground("sunrise");
 
             //Load the content for the Scrolling background
             mScrollingBackground.LoadContent(this.Content);
 
-            //Load the content for the platform
-            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(30, 400)));
-            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(350, 300)));
-            platforms.Add(new Platform(Content.Load<Texture2D>("Platform"), new Vector2(700, 350)));
+            //Load the content for each platform
+            foreach (Platform platform in platforms)
+            {
+                platform.LoadContent(this.Content);
+            }
 
             //Load sound effect
             backgroundSong = Content.Load<Song>("Song");
@@ -94,7 +117,7 @@ namespace timerunner
             // TODO: Unload any non ContentManager content here
         }
 
-        bool touched;
+        bool intersectsPlatform;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -106,16 +129,23 @@ namespace timerunner
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData,
-                monsterTrial.Size, monsterTrial.textureData))
-            {
-                touched = true;
-            }
-            else
-                touched = false;
+            // set intersectsPlatform to false befor testing
+            intersectsPlatform = false;
 
-            // TODO: Add your update logic here
-            firstPlayerSprite.Update(gameTime);
+            foreach (Platform platform in platforms)
+            {
+              
+                if (IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
+                {
+                    // intersectsPlatform is set true if player intersects with any platform
+                    intersectsPlatform = true;
+                    break;
+                }
+            }
+
+            // hands intersectsPlatform to player class
+            firstPlayerSprite.Update(gameTime, intersectsPlatform);
+
             monsterTrial.Update(gameTime);
 
             //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
@@ -137,25 +167,22 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            
-            if (touched)
-                graphics.GraphicsDevice.Clear(Color.Red);
-            else
-                graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code hereC:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\Game1.cs
             spriteBatch.Begin();
-            mScrollingBackground.Draw(spriteBatch);            
+
+            mScrollingBackground.Draw(spriteBatch); 
+           
             foreach (Platform platform in platforms)
-                platform.Draw(spriteBatch);
+                platform.Draw(this.spriteBatch);
 
             firstPlayerSprite.Draw(this.spriteBatch);
+
             monsterTrial.Draw(this.spriteBatch);
            
             //Kimi: For debug purpose
             spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
             
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 

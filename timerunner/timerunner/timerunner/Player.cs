@@ -13,14 +13,19 @@ namespace timerunner
 {
     class Player : Sprite
     {
+        // Constants
         const string PLAYER_ASSETNAME = "knight";
-        const int PLAYER_SPEED = 300;
-        const int MAX_JUMP_HEIGHT = 200;
-        const int MOVE_UP = -1;
-        const int MOVE_DOWN = 1;
-        //const int MOVE_LEFT = -1;
-        //const int MOVE_RIGHT = 1;
-        const int BOT_DIST = 50;
+        const float PLAYER_SPEED = 300; // Walking Speed
+        
+        const float MOVE_UP = -1.9f; // Speed when jumping up
+        const float MOVE_DOWN = 1.7f;  // Speed when coming down after jump
+        
+
+        bool SwordAttack = false;
+        bool Injured = false;
+
+        float BOT_DIST = 0; //Initialising distance from the ground, set again in the constructor
+        float MAX_JUMP_HEIGHT = 0; // is set again in the constructor
         Vector2 mStartingPosition = Vector2.Zero;
         List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
@@ -32,22 +37,23 @@ namespace timerunner
         {
             Walking,
             Jumping,
-            Melee,
-            Firing
+            Falling
         }
+        
+        //Initialize Player Entity
         State mCurrentState = State.Walking;
-
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
-
         KeyboardState mPreviousKeyboardState;
 
-        public Player(int WindowWidth, int WindowHeight)
+        public Player(int WindowWidth, int WindowHeight, float jumpheight, float start)
         {
             Position = new Vector2(WindowWidth, WindowHeight);
-            this.mCurrentState = State.Walking;
+            MAX_JUMP_HEIGHT = jumpheight;
+            BOT_DIST = start;
         }
 
+        // Override Draw Function to draw fireballs
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             foreach (Fireball aFireball in mFireballs)
@@ -66,23 +72,42 @@ namespace timerunner
                 aFireball.LoadContent(theContentManager);
             }
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
-            Position = new Vector2((Position.X - (texture.Width)) / 2, Position.Y - texture.Height - BOT_DIST);
+
+            // Set starting position for Player 
+            Position = new Vector2(((Position.X/2) - (texture.Width)) / 2, Position.Y - texture.Height - BOT_DIST);
 
             //Load sound effect
             shootSound = theContentManager.Load<SoundEffect>("Effect");
         }
 
-        public void Update(GameTime theGameTime)
+        public void Update(GameTime theGameTime, bool intersects)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
-
-            UpdateMovement(aCurrentKeyboardState);
+            UpdateFalling(intersects);
             UpdateJump(aCurrentKeyboardState);
             UpdateFireball(theGameTime, aCurrentKeyboardState);
 
             mPreviousKeyboardState = aCurrentKeyboardState;
 
             base.Update(theGameTime, mSpeed, mDirection);
+        }
+
+        private void UpdateFalling(bool intersects)
+        {
+            if (mCurrentState == State.Falling)
+            {
+                if (intersects)
+                {
+                    mCurrentState = State.Walking;
+                    mDirection.Y = 0;
+                }
+                else
+                {
+                    mDirection.Y = MOVE_DOWN;
+                }
+
+            }
+
         }
 
         private void UpdateJump(KeyboardState aCurrentKeyboardState)
@@ -99,7 +124,7 @@ namespace timerunner
             {
                 if (mStartingPosition.Y - Position.Y > MAX_JUMP_HEIGHT)
                 {
-                    mDirection.Y = MOVE_DOWN;
+                    mCurrentState = State.Falling;
                 }
 
                 if (Position.Y > mStartingPosition.Y)
@@ -110,6 +135,7 @@ namespace timerunner
                 }
             }
         }
+
 
         private void Jump()
         {
@@ -161,35 +187,5 @@ namespace timerunner
                 }
         }
 
-        private void UpdateMovement(KeyboardState aCurrentKeyboardState)
-        {
-            if (mCurrentState == State.Walking)
-            {
-                mSpeed = Vector2.Zero;
-                mDirection = Vector2.Zero;
-
-                //if (aCurrentKeyboardState.IsKeyDown(Keys.Left) == true)
-                //{
-                //    mSpeed.X = PLAYER_SPEED;
-                //    mDirection.X = MOVE_LEFT;
-                //}
-                //else if (aCurrentKeyboardState.IsKeyDown(Keys.Right) == true)
-                //{
-                //    mSpeed.X = PLAYER_SPEED;
-                //    mDirection.X = MOVE_RIGHT;
-                //}
-
-                //if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true)
-                //{
-                //    mSpeed.Y = PLAYER_SPEED;
-                //    mDirection.Y = MOVE_UP;
-                //}
-                //else if (aCurrentKeyboardState.IsKeyDown(Keys.Down) == true)
-                //{
-                //    mSpeed.Y = PLAYER_SPEED;
-                //    mDirection.Y = MOVE_DOWN;
-                //}
-            }
-        }
     }
 }
