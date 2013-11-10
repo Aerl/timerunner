@@ -84,12 +84,12 @@
       <Time>2013-11-06T17:54:10.8052129-06:00</Time>
     </Item>
     <Item>
-      <Source>sunrise.png</Source>
-      <Name>sunrise</Name>
+      <Source>dawn.png</Source>
+      <Name>dawn</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\sunrise.xnb</Output>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\dawn.xnb</Output>
       <Time>2013-11-10T15:38:34.0948486-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>

@@ -89,8 +89,8 @@ namespace timerunner
             //mScrollingBackground.AddBackground("Background03");
             //mScrollingBackground.AddBackground("Background04");
             //mScrollingBackground.AddBackground("Background05");
-            mScrollingBackground.AddBackground("sunrise");
-            mScrollingBackground.AddBackground("sunrise");
+            mScrollingBackground.AddBackground("dawn");
+            mScrollingBackground.AddBackground("dawn");
 
             //Load the content for the Scrolling background
             mScrollingBackground.LoadContent(this.Content);

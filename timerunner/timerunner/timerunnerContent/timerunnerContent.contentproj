@@ -105,8 +105,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sunrise.png">
-      <Name>sunrise</Name>
+    <Compile Include="dawn.png">
+      <Name>dawn</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

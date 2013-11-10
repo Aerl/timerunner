@@ -8,4 +8,4 @@ Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
 Content\Background06.xnb
-Content\sunrise.xnb
+Content\dawn.xnb
