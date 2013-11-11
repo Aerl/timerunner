@@ -161,6 +161,19 @@ namespace timerunner
             //        firstPlayerSprite.hasJumped = false;
             //    }
 
+            //use for if a fireball hits a monster
+            foreach (Fireball f in firstPlayerSprite.mFireballs)
+            {
+                if (IntersectPixel(f.Size, f.textureData, monsterTrial.Size, monsterTrial.textureData))
+                {
+                    //Add code for it hit
+                }
+                else
+                {
+                    //Add code for not hit
+                }
+            }
+
             base.Update(gameTime);
         }
 
@@ -209,8 +222,35 @@ namespace timerunner
             return false;
         }
 
+                //We need to figure out changeInX and changeInY
+        static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
+        {
+            Vector2 v = new Vector2();
+
+            int slope = changeInY / changeInX;
+
+            Random r = new Random();
+            int randomY = r.Next(0, Convert.ToInt32(yPreviousLocation) + maxJumpHeight);
+            int randomX = 0;
+
+            if (randomY > yPreviousLocation)
+            {
+                randomX = r.Next((randomY - Convert.ToInt32(yPreviousLocation)) / slope, (-1 * randomY + Convert.ToInt32(yPreviousLocation) + 2 * maxJumpHeight));
+            }
+            else
+            {
+                randomX = r.Next(0, (-1 * randomY + Convert.ToInt32(yPreviousLocation) + 2 * maxJumpHeight));
+            }
+
+            return v;
+        }
+
+
+    }     
 
     }        
+
+
         //static class RectangleHelper
         //{
         //    const int penetrationMargin = 5;

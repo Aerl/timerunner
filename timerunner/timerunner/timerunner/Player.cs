@@ -27,7 +27,7 @@ namespace timerunner
         float BOT_DIST = 0; //Initialising distance from the ground, set again in the constructor
         float MAX_JUMP_HEIGHT = 0; // is set again in the constructor
         Vector2 mStartingPosition = Vector2.Zero;
-        List<Fireball> mFireballs = new List<Fireball>();
+        public List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
 
         //Sound

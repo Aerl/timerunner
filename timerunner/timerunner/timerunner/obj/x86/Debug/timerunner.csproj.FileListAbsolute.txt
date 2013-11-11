@@ -16,12 +16,6 @@ C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x8
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Abaddon.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background01.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background02.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background03.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background04.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background05.xnb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.exe
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.pdb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.csprojResolveAssemblyReference.cache
@@ -51,3 +45,11 @@ C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.wma
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background06.xnb
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\dawn.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platform.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fizz.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Background06.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\dawn.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Effect.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Arial.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.wma
