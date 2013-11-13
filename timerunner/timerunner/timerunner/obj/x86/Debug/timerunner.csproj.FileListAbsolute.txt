@@ -53,3 +53,4 @@ C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.xnb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Arial.xnb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.wma
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\FireballEnergyBar.xnb

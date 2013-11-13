@@ -92,6 +92,15 @@
       <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Arial.xnb</Output>
       <Time>2013-11-10T23:02:02.4094134-06:00</Time>
     </Item>
+    <Item>
+      <Source>FireballEnergyBar.png</Source>
+      <Name>FireballEnergyBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\FireballEnergyBar.xnb</Output>
+      <Time>2013-11-12T19:29:11.5444651-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

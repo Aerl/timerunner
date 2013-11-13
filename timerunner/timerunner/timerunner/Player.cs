@@ -16,9 +16,12 @@ namespace timerunner
         // Constants
         const string PLAYER_ASSETNAME = "knight";
         const float PLAYER_SPEED = 300; // Walking Speed
+        const double fireballEnergyIncrease = .003;
         
         const float MOVE_UP = -1.9f; // Speed when jumping up
         const float MOVE_DOWN = 1.7f;  // Speed when coming down after jump
+
+        public double fireballEnergyPercentage = 0;
         
 
         bool SwordAttack = false;
@@ -91,6 +94,12 @@ namespace timerunner
             mPreviousKeyboardState = aCurrentKeyboardState;
 
             base.Update(theGameTime, mSpeed, mDirection);
+
+            //Controls how many fireballs you can shoot
+            if (fireballEnergyPercentage < 1)
+            {
+                fireballEnergyPercentage += fireballEnergyIncrease;
+            }
         }
 
         private void UpdateFalling(bool intersects)
@@ -161,8 +170,12 @@ namespace timerunner
 
             if (aCurrentKeyboardState.IsKeyDown(Keys.Space) == true && mPreviousKeyboardState.IsKeyDown(Keys.Space) == false)
             {
-                ShootFireball();
-                shootSound.Play();
+                if (fireballEnergyPercentage > .333)
+                {
+                    ShootFireball();
+                    shootSound.Play();
+                    fireballEnergyPercentage -= .333;
+                }
             }
         }
 

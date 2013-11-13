@@ -24,6 +24,7 @@ namespace timerunner
 
         Player firstPlayerSprite;
         Monster monsterTrial;
+        FireballEnergyBar fireballEnergyBar;
         List<Platform> platforms = new List<Platform>();
         SpriteFont font;
 
@@ -55,15 +56,17 @@ namespace timerunner
         {
             // Initialize Player
             firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT);
-            
+
             // Initialize Monters
             monsterTrial = new Monster(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-         
+
+            fireballEnergyBar = new FireballEnergyBar();
+
             // Initialize Platforms
             platforms.Add(new Platform("Platform", new Vector2(30, 400)));
             platforms.Add(new Platform("Platform", new Vector2(350, 300)));
             platforms.Add(new Platform("Platform", new Vector2(700, 350)));
-           
+
             base.Initialize();
         }
 
@@ -82,6 +85,11 @@ namespace timerunner
 
             // Load Monstercontent
             monsterTrial.LoadContent(this.Content);
+
+            fireballEnergyBar.LoadContent(this.Content);
+
+            // TODO: Load any ResourceManagementMode.Automatic content
+
 
             mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
             //mScrollingBackground.AddBackground("Background01");
@@ -134,7 +142,7 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
             {
-              
+
                 if (IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
                 {
                     // intersectsPlatform is set true if player intersects with any platform
@@ -147,6 +155,8 @@ namespace timerunner
             firstPlayerSprite.Update(gameTime, intersectsPlatform);
 
             monsterTrial.Update(gameTime);
+
+            fireballEnergyBar.Update(gameTime);
 
             foreach (Platform platform in platforms)
                 platform.Update(gameTime);
@@ -185,18 +195,20 @@ namespace timerunner
         {
             spriteBatch.Begin();
 
-            mScrollingBackground.Draw(spriteBatch); 
-           
+            mScrollingBackground.Draw(spriteBatch);
+
             foreach (Platform platform in platforms)
                 platform.Draw(this.spriteBatch);
 
             firstPlayerSprite.Draw(this.spriteBatch);
 
             monsterTrial.Draw(this.spriteBatch);
-           
+
+            fireballEnergyBar.Draw(this.spriteBatch,graphics,firstPlayerSprite.fireballEnergyPercentage);
+
             //Kimi: For debug purpose
             spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
-            
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -209,20 +221,20 @@ namespace timerunner
             int left = Math.Max(rect1.Left, rect2.Left);
             int right = Math.Min(rect1.Right, rect2.Right);
 
-            for(int y = top; y<bottom; y++)
+            for (int y = top; y < bottom; y++)
                 for (int x = left; x < right; x++)
                 {
-                        Color c1 = data1[(x - rect1.Left) + (y - rect1.Top) * rect1.Width];
-                        Color c2 = data2[(x - rect2.Left) + (y - rect2.Top) * rect2.Width];
+                    Color c1 = data1[(x - rect1.Left) + (y - rect1.Top) * rect1.Width];
+                    Color c2 = data2[(x - rect2.Left) + (y - rect2.Top) * rect2.Width];
 
-                        if (c1.A != 0 && c2.A != 0)
-                            return true;
+                    if (c1.A != 0 && c2.A != 0)
+                        return true;
                 }
 
             return false;
         }
 
-                //We need to figure out changeInX and changeInY
+        //We need to figure out changeInX and changeInY
         static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
         {
             Vector2 v = new Vector2();
@@ -246,20 +258,19 @@ namespace timerunner
         }
 
 
-    }     
+    }
 
-    }        
-
-
-        //static class RectangleHelper
-        //{
-        //    const int penetrationMargin = 5;
-        //    public static bool isOnTopOf(this Rectangle r1, Rectangle r2)
-        //    {
-        //        return (r1.Bottom >= r2.Top - penetrationMargin &&
-        //            r1.Bottom <= r2.Top + 1 &&
-        //            r1.Right >= r2.Left + 5 &&
-        //            r1.Left <= r2.Right - 5);
-        //    }
-        //}
 }
+
+//static class RectangleHelper
+//{
+//    const int penetrationMargin = 5;
+//    public static bool isOnTopOf(this Rectangle r1, Rectangle r2)
+//    {
+//        return (r1.Bottom >= r2.Top - penetrationMargin &&
+//            r1.Bottom <= r2.Top + 1 &&
+//            r1.Right >= r2.Left + 5 &&
+//            r1.Left <= r2.Right - 5);
+//    }
+//}
+

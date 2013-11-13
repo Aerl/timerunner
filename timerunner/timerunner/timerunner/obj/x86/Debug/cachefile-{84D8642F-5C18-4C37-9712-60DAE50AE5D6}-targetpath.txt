@@ -9,3 +9,4 @@ Content\Effect.xnb
 Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
+Content\FireballEnergyBar.xnb
