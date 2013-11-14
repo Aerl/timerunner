@@ -97,8 +97,10 @@ namespace timerunner
             //mScrollingBackground.AddBackground("Background03");
             //mScrollingBackground.AddBackground("Background04");
             //mScrollingBackground.AddBackground("Background05");
-            mScrollingBackground.AddBackground("dawn");
-            mScrollingBackground.AddBackground("dawn");
+            mScrollingBackground.AddBackground("sunrise");
+            mScrollingBackground.AddBackground("daywclouds");
+            mScrollingBackground.AddBackground("dusk");
+            mScrollingBackground.AddBackground("nightwstars");
 
             //Load the content for the Scrolling background
             mScrollingBackground.LoadContent(this.Content);
@@ -237,24 +239,31 @@ namespace timerunner
         //We need to figure out changeInX and changeInY
         static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
         {
-            Vector2 v = new Vector2();
+            
+            
+            float slope = -(float)changeInY / (float)changeInX;
+            int mjh = -maxJumpHeight;
+            int cix = changeInX;
+            int ciy = changeInY;
+            float yprev = yPreviousLocation;
 
-            int slope = changeInY / changeInX;
+            int jumpHeight = mjh + 100;
 
             Random r = new Random();
-            int randomY = r.Next(0, Convert.ToInt32(yPreviousLocation) + maxJumpHeight);
+            int randomY = r.Next((Convert.ToInt32(yPreviousLocation) + jumpHeight),700);
             int randomX = 0;
+            int min = Convert.ToInt32(((float)randomY - yprev) / slope);
+            int max = Convert.ToInt32((-1 * (float)randomY + yprev + 2 * (float)jumpHeight) / slope);
 
             if (randomY > yPreviousLocation)
             {
-                randomX = r.Next((randomY - Convert.ToInt32(yPreviousLocation)) / slope, (-1 * randomY + Convert.ToInt32(yPreviousLocation) + 2 * maxJumpHeight));
+                randomX = r.Next(min, max-100);
             }
             else
             {
-                randomX = r.Next(0, (-1 * randomY + Convert.ToInt32(yPreviousLocation) + 2 * maxJumpHeight));
+                randomX = r.Next(max,700-100);
             }
-
-            return v;
+            return new Vector2(randomX + 1000, randomY);
         }
 
 

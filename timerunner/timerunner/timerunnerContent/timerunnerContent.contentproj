@@ -70,13 +70,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform.jpg">
-      <Name>Platform</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Song.mp3">
       <Name>Song</Name>
       <Importer>Mp3Importer</Importer>
@@ -98,15 +91,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background06.png">
-      <Name>Background06</Name>
+    <Compile Include="day.png">
+      <Name>day</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dawn.png">
-      <Name>dawn</Name>
+    <Compile Include="dusk.png">
+      <Name>dusk</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="daywclouds.png">
+      <Name>daywclouds</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="night.png">
+      <Name>night</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="nightwstars.png">
+      <Name>nightwstars</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="sunrise.png">
+      <Name>sunrise</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -114,6 +129,20 @@
   <ItemGroup>
     <Compile Include="FireballEnergyBar.png">
       <Name>FireballEnergyBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Platform2.png">
+      <Name>Platform2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Platform.png">
+      <Name>Platform</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
