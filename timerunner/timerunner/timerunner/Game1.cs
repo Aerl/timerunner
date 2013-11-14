@@ -255,29 +255,26 @@ namespace timerunner
         //We need to figure out changeInX and changeInY
         static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
         {
-            float slope = -(float)changeInY / (float)changeInX;
-            int mjh = -maxJumpHeight;
-            int cix = changeInX;
-            int ciy = changeInY;
-            float yprev = yPreviousLocation;
-
-            int jumpHeight = mjh + 100;
-
+            double slope = (double)changeInY * -1 / (double)changeInX;
+            int yPrev = Convert.ToInt32(yPreviousLocation);
+            int randomY;
+            int randomX;
             Random r = new Random();
-            int randomY = r.Next((Convert.ToInt32(yPreviousLocation) + jumpHeight), 700);
-            int randomX = 0;
-            int min = Convert.ToInt32(((float)randomY - yprev) / slope);
-            int max = Convert.ToInt32((-1 * (float)randomY + yprev + 2 * (float)jumpHeight) / slope);
-
-            if (randomY > yPreviousLocation)
+            if (yPrev - maxJumpHeight < 100)
+                randomY = r.Next(100, 700);
+            else
+                randomY = r.Next(yPrev - maxJumpHeight, 700);
+            int x1 = Convert.ToInt32((randomY - yPrev) / slope);
+            int x2 = Convert.ToInt32((randomY - yPrev + 2 * maxJumpHeight) / (-1 * slope));
+            if (randomY > yPrev)
             {
-                randomX = r.Next(min, max - 100);
+                randomX = r.Next(0, x2);
             }
             else
             {
-                randomX = r.Next(max, 700 - 100);
+                randomX = r.Next(x1, x2);
             }
-            return new Vector2(randomX + 900, randomY);
+            return new Vector2(randomX + 1000, randomY);
         }
 
 
