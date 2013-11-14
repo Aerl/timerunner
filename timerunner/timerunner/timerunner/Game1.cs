@@ -28,6 +28,9 @@ namespace timerunner
         List<Platform> platforms = new List<Platform>();
         SpriteFont font;
 
+        //PlatForm 
+        Platform currentPlatForm, outScreenPlatForm;
+
         //Sound
         Song backgroundSong;
 
@@ -63,9 +66,10 @@ namespace timerunner
             fireballEnergyBar = new FireballEnergyBar();
 
             // Initialize Platforms
-            platforms.Add(new Platform("Platform", new Vector2(30, 400)));
-            platforms.Add(new Platform("Platform", new Vector2(350, 300)));
-            platforms.Add(new Platform("Platform", new Vector2(700, 350)));
+            currentPlatForm = new Platform("Platform", new Vector2(30, 400));
+            platforms.Add(currentPlatForm);
+            outScreenPlatForm = new Platform("Platform", new Vector2(1300, -350));
+            platforms.Add(outScreenPlatForm);
 
             base.Initialize();
         }
@@ -92,11 +96,7 @@ namespace timerunner
 
 
             mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
-            //mScrollingBackground.AddBackground("Background01");
-            //mScrollingBackground.AddBackground("Background02");
-            //mScrollingBackground.AddBackground("Background03");
-            //mScrollingBackground.AddBackground("Background04");
-            //mScrollingBackground.AddBackground("Background05");
+
             mScrollingBackground.AddBackground("sunrise");
             mScrollingBackground.AddBackground("daywclouds");
             mScrollingBackground.AddBackground("dusk");
@@ -186,6 +186,22 @@ namespace timerunner
                 }
             }
 
+            //generate the platforms
+            foreach (Platform platform in platforms)
+            {
+                platform.Update(gameTime);
+                if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
+                {
+                    Platform temp = currentPlatForm;
+                    outScreenPlatForm.Position = GenerateRandomLandLocation(300, currentPlatForm.Position.Y, 400, Convert.ToInt32(1.9f * 300));
+                    //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
+                    currentPlatForm = outScreenPlatForm;
+
+                    outScreenPlatForm = temp;
+                    //platform.stop();
+                }
+            }
+
             base.Update(gameTime);
         }
 
@@ -239,8 +255,6 @@ namespace timerunner
         //We need to figure out changeInX and changeInY
         static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
         {
-            
-            
             float slope = -(float)changeInY / (float)changeInX;
             int mjh = -maxJumpHeight;
             int cix = changeInX;
@@ -250,20 +264,20 @@ namespace timerunner
             int jumpHeight = mjh + 100;
 
             Random r = new Random();
-            int randomY = r.Next((Convert.ToInt32(yPreviousLocation) + jumpHeight),700);
+            int randomY = r.Next((Convert.ToInt32(yPreviousLocation) + jumpHeight), 700);
             int randomX = 0;
             int min = Convert.ToInt32(((float)randomY - yprev) / slope);
             int max = Convert.ToInt32((-1 * (float)randomY + yprev + 2 * (float)jumpHeight) / slope);
 
             if (randomY > yPreviousLocation)
             {
-                randomX = r.Next(min, max-100);
+                randomX = r.Next(min, max - 100);
             }
             else
             {
-                randomX = r.Next(max,700-100);
+                randomX = r.Next(max, 700 - 100);
             }
-            return new Vector2(randomX + 1000, randomY);
+            return new Vector2(randomX + 900, randomY);
         }
 
 
