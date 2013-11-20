@@ -11,8 +11,8 @@ Content\sunrise.xnb
 Content\FireballEnergyBar.xnb
 Content\Platform2.xnb
 Content\Platform.xnb
+Content\deadWalrus.xnb
 Content\Effect.xnb
 Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
-Content\deadWalrus.xnb

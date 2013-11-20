@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
 
 namespace timerunner
@@ -37,6 +38,14 @@ namespace timerunner
         //Sound
         SoundEffect shootSound;
 
+        //Animation
+        int currentFrame;
+        int totalFrames;
+        Texture2D spriteSheet;
+        Rectangle currentSprite;
+        int spriteWidth;
+        int spriteHeight;
+
         enum State
         {
             Walking,
@@ -49,12 +58,22 @@ namespace timerunner
         Vector2 mDirection = new Vector2(0, -1);
         Vector2 mSpeed = Vector2.Zero;
         KeyboardState mPreviousKeyboardState;
+        
 
         public Player(int WindowWidth, int WindowHeight, float jumpheight, float start)
         {
             Position = new Vector2(WindowWidth, WindowHeight);
             MAX_JUMP_HEIGHT = jumpheight;
             BOT_DIST = start;
+
+            // Prepare frames and spritesheet for running animation
+            currentFrame = 0;
+            totalFrames = 8;
+            // ??? This is hard with how we are loading content...it's
+            // ??? tricky to keep sprite information out of the Game class.
+            //spriteWidth = spriteSheet.Width / totalFrames;
+            //spriteHeight = spriteSheet.Height;
+            //currentSprite = new Rectangle(currentFrame * spriteWidth, 0, spriteWidth, spriteHeight);
         }
 
         // Override Draw Function to draw fireballs
@@ -204,6 +223,16 @@ namespace timerunner
                         new Vector2(200, 200), new Vector2(1, 0));
                     mFireballs.Add(aFireball);
                 }
+        }
+
+        public void animateRunning()
+        {
+            if (currentFrame < (totalFrames - 1))
+                currentFrame++;
+            else
+                currentFrame = 0;
+
+            currentSprite.X = currentFrame * spriteWidth;
         }
 
     }

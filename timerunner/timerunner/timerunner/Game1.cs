@@ -38,6 +38,10 @@ namespace timerunner
         //Sound
         Song backgroundSong;
 
+        //Animation
+        float frameTimer;
+        float frameInterval;
+
         // Player and Window Constants
         const float PLAYER_JUMP_HEIGHT = 300;
         const float PLAYER_INIT_HEIGHT = 500;
@@ -71,6 +75,10 @@ namespace timerunner
             platforms.Add(currentPlatForm);
             outScreenPlatForm = new Platform("Platform", new Vector2(1300, -350));
             platforms.Add(outScreenPlatForm);
+
+            // Initialize Animation Properties
+            frameTimer = 0;
+            frameInterval = 80f;
 
             base.Initialize();
         }
@@ -302,9 +310,7 @@ namespace timerunner
             int randomY=0;
             int randomX=0;
             int maxJumpHeight = max - 30;
-            while (randomX < 8
-                
-                0)
+            while (randomX < 80)
             {
                 Random r = new Random();
                 if (yPrev - maxJumpHeight < 100)
