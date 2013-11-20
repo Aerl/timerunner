@@ -13,11 +13,12 @@ namespace timerunner
         ContentManager mContentManager;
         string Platform_ASSETNAME = ""; // texture name is set in constructor
         Vector2 mDirection = new Vector2(-1, 0);
-        const float PLATFORM_SPEED = 100; // Walking Speed
-        Vector2 mSpeed = new Vector2(PLATFORM_SPEED, PLATFORM_SPEED);
+        int PLATFORM_SPEED = 200; // Walking Speed
+        Vector2 mSpeed;
         public Platform(String Asset, Vector2 newPosition)
         {
             //Constructor requires 2-Elementvector and texturename
+            mSpeed = new Vector2(PLATFORM_SPEED, PLATFORM_SPEED);
             Platform_ASSETNAME = Asset;
             Position = newPosition;
 
@@ -35,6 +36,12 @@ namespace timerunner
         public override void Draw(SpriteBatch theSpriteBatch)
         {
             base.Draw(theSpriteBatch);
+        }
+
+        public void ChangeSpeed(int speed)
+        {
+            mSpeed.X = speed;
+            mSpeed.Y = speed;
         }
 
         public void Update(GameTime theGameTime)

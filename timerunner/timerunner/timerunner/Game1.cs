@@ -18,6 +18,10 @@ namespace timerunner
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        int speedOfGround = 200;
+
+        float randomStarter = 0;
+        bool monsterVisible = false;
 
         //Create a Horizontally scrolling background
         HorizontallyScrollingBackground mScrollingBackground;
@@ -60,9 +64,6 @@ namespace timerunner
             // Initialize Player
             firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT);
 
-            // Initialize Monters
-            monsterTrial = new Monster(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-
             fireballEnergyBar = new FireballEnergyBar();
 
             // Initialize Platforms
@@ -86,9 +87,6 @@ namespace timerunner
 
             // Load Playercontent
             firstPlayerSprite.LoadContent(this.Content);
-
-            // Load Monstercontent
-            monsterTrial.LoadContent(this.Content);
 
             fireballEnergyBar.LoadContent(this.Content);
 
@@ -114,8 +112,8 @@ namespace timerunner
             //Load sound effect
             backgroundSong = Content.Load<Song>("Song");
 
-            MediaPlayer.Play(backgroundSong);
-            MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(backgroundSong);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -128,6 +126,7 @@ namespace timerunner
         }
 
         bool intersectsPlatform;
+        bool monsterIntersectPlatform;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -142,6 +141,9 @@ namespace timerunner
             // set intersectsPlatform to false befor testing
             intersectsPlatform = false;
 
+            RandomMonsterGenerator();
+
+
             foreach (Platform platform in platforms)
             {
 
@@ -153,10 +155,54 @@ namespace timerunner
                 }
             }
 
+
             // hands intersectsPlatform to player class
             firstPlayerSprite.Update(gameTime, intersectsPlatform);
 
-            monsterTrial.Update(gameTime);
+            if (monsterVisible == true)
+            {
+                foreach (Platform platform in platforms)
+                {
+
+                    {
+                        if (IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
+                        {
+                            // intersectsPlatform is set true if monster intersects with any platform
+                            monsterIntersectPlatform = true;
+                            break;
+                        }
+                    }
+                }
+                //use for if a fireball hits a monster
+                foreach (Fireball f in firstPlayerSprite.mFireballs)
+                {
+                     {
+                        if (IntersectPixel(f.Size, f.textureData, monsterTrial.Size, monsterTrial.textureData))
+                        {
+                            monsterTrial.Hit();
+                            f.Position.X = 2000;
+                            f.Size.X = 2000;
+                        }
+                        else
+                        {
+                            //Add code for not hit
+                        }
+                    }
+                }
+                if (IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
+                {
+                    //monsterTrial.Hit();
+                    //f.Position.X = 1200;
+                }
+                monsterTrial.Update(gameTime, monsterIntersectPlatform);
+
+                if (monsterTrial.Size.X < -200 || monsterTrial.Size.Y > 1500)
+                {
+                    monsterTrial = null;
+                    monsterVisible = false;
+                    monsterIntersectPlatform = false;
+                }
+            }
 
             fireballEnergyBar.Update(gameTime);
 
@@ -173,18 +219,7 @@ namespace timerunner
             //        firstPlayerSprite.hasJumped = false;
             //    }
 
-            //use for if a fireball hits a monster
-            foreach (Fireball f in firstPlayerSprite.mFireballs)
-            {
-                if (IntersectPixel(f.Size, f.textureData, monsterTrial.Size, monsterTrial.textureData))
-                {
-                    //Add code for it hit
-                }
-                else
-                {
-                    //Add code for not hit
-                }
-            }
+
 
             //generate the platforms
             foreach (Platform platform in platforms)
@@ -220,12 +255,19 @@ namespace timerunner
 
             firstPlayerSprite.Draw(this.spriteBatch);
 
-            monsterTrial.Draw(this.spriteBatch);
+            if (monsterVisible == true)
+            {
+                monsterTrial.Draw(this.spriteBatch);
+            }
 
             fireballEnergyBar.Draw(this.spriteBatch,graphics,firstPlayerSprite.fireballEnergyPercentage);
 
             //Kimi: For debug purpose
             spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
+            if (monsterVisible)
+            {
+                spriteBatch.DrawString(font, monsterTrial.Position.ToString(), new Vector2(10, 50), Color.White);
+            }
 
             spriteBatch.End();
 
@@ -253,28 +295,62 @@ namespace timerunner
         }
 
         //We need to figure out changeInX and changeInY
-        static Vector2 GenerateRandomLandLocation(int maxJumpHeight, float yPreviousLocation, int changeInX, int changeInY)
+        static Vector2 GenerateRandomLandLocation(int max, float yPreviousLocation, int changeInX, int changeInY)
         {
             double slope = (double)changeInY * -1 / (double)changeInX;
             int yPrev = Convert.ToInt32(yPreviousLocation);
-            int randomY;
-            int randomX;
-            Random r = new Random();
-            if (yPrev - maxJumpHeight < 100)
-                randomY = r.Next(100, 700);
-            else
-                randomY = r.Next(yPrev - maxJumpHeight, 700);
-            int x1 = Convert.ToInt32((randomY - yPrev) / slope);
-            int x2 = Convert.ToInt32((randomY - yPrev + 2 * maxJumpHeight) / (-1 * slope));
-            if (randomY > yPrev)
+            int randomY=0;
+            int randomX=0;
+            int maxJumpHeight = max - 30;
+            while (randomX < 8
+                
+                0)
             {
-                randomX = r.Next(0, x2);
-            }
-            else
-            {
-                randomX = r.Next(x1, x2);
+                Random r = new Random();
+                if (yPrev - maxJumpHeight < 100)
+                    randomY = r.Next(100, 600);
+                else
+                    randomY = r.Next(yPrev - maxJumpHeight, 600);
+                int x1 = Convert.ToInt32((randomY - yPrev) / slope);
+                int x2 = Convert.ToInt32((randomY - yPrev + 2 * maxJumpHeight) / (-1 * slope));
+                if (randomY > yPrev)
+                {
+                    randomX = r.Next(0, x2);
+                }
+                else
+                {
+                    randomX = r.Next(x1, x2);
+                }
             }
             return new Vector2(randomX + 1000, randomY);
+        }
+
+        public void GenerateRandomMonster()
+        {
+            // Initialize Monters
+            monsterTrial = new Monster(speedOfGround);
+            
+            // Load Monstercontent
+            monsterTrial.LoadContent(this.Content);
+            monsterVisible = true;
+        }
+
+        private void RandomMonsterGenerator()
+        {
+            //Random Generation of Monsters
+            if (randomStarter < 300 && monsterVisible == false)
+            {
+                randomStarter++;
+            }
+            else if (monsterVisible == false)
+            {
+                Random r = new Random();
+                int possibleGenerationNumber = r.Next(0, 300);
+                if (possibleGenerationNumber == 50)
+                {
+                    GenerateRandomMonster();
+                }
+            }
         }
 
 

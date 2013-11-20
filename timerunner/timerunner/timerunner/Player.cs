@@ -18,6 +18,7 @@ namespace timerunner
         const float PLAYER_SPEED = 300; // Walking Speed
         const double fireballEnergyIncrease = .003;
         
+        
         const float MOVE_UP = -1.9f; // Speed when jumping up
         const float MOVE_DOWN = 1.7f;  // Speed when coming down after jump
 
@@ -100,6 +101,7 @@ namespace timerunner
             {
                 fireballEnergyPercentage += fireballEnergyIncrease;
             }
+
         }
 
         private void UpdateFalling(bool intersects)
