@@ -46,15 +46,16 @@ namespace timerunner
         int spriteWidth;
         int spriteHeight;
 
-        enum State
+        public enum State
         {
             Walking,
             Jumping,
-            Falling
+            Falling,
+            Die
         }
         
         //Initialize Player Entity
-        State mCurrentState = State.Falling;
+        public State mCurrentState = State.Falling;
         Vector2 mDirection = new Vector2(0, -1);
         Vector2 mSpeed = Vector2.Zero;
         KeyboardState mPreviousKeyboardState;
@@ -121,6 +122,11 @@ namespace timerunner
                 fireballEnergyPercentage += fireballEnergyIncrease;
             }
 
+            //if the player is under the game screen, then die
+            if (this.Position.Y > 700)
+            {
+                mCurrentState = State.Die;
+            }
         }
 
         private void UpdateFalling(bool intersects)

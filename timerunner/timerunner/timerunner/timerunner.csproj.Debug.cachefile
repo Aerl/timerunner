@@ -12,9 +12,6 @@ Content\FireballEnergyBar.xnb
 Content\Platform2.xnb
 Content\Platform.xnb
 Content\deadWalrus.xnb
-Content\Effect.xnb
-Content\Song.xnb
-Content\Arial.xnb
 Content\level2a.xnb
 Content\level2b.xnb
 Content\level2c.xnb
@@ -30,4 +27,9 @@ Content\level3e.xnb
 Content\level3f.xnb
 Content\level3g.xnb
 Content\level3h.xnb
+Content\start.xnb
+Content\gameover.xnb
+Content\Effect.xnb
+Content\Song.xnb
+Content\Arial.xnb
 Content\Song.wma

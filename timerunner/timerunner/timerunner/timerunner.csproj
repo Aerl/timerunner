@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Fireball.cs" />
     <Compile Include="FireballEnergyBar.cs" />
+    <Compile Include="HelpClass.cs" />
     <Compile Include="HorizontallyScrollingBackground.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Platform.cs" />
