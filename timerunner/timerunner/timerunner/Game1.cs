@@ -118,10 +118,17 @@ namespace timerunner
             mScrollingBackgroundlandscape.AddBackground("level2d");
             mScrollingBackgroundlandscape.AddBackground("level2e");
             mScrollingBackgroundlandscape.AddBackground("level2f");
+            mScrollingBackgroundlandscape.AddBackground("level2g");
 
             mScrollingBackgroundfront = new randombackground(this.GraphicsDevice.Viewport);
-
-            mScrollingBackgroundfront.AddBackground("level2a");
+            mScrollingBackgroundfront.AddBackground("level3a");
+            mScrollingBackgroundfront.AddBackground("level3b");
+            mScrollingBackgroundfront.AddBackground("level3c");
+            mScrollingBackgroundfront.AddBackground("level3d");
+            mScrollingBackgroundfront.AddBackground("level3e");
+            mScrollingBackgroundfront.AddBackground("level3f");
+            mScrollingBackgroundfront.AddBackground("level3g");
+            mScrollingBackgroundfront.AddBackground("level3h");
 
             //Load the content for the Scrolling background
             mScrollingBackgroundsky.LoadContent(this.Content);
