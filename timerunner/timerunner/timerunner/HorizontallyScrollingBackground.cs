@@ -12,15 +12,15 @@ namespace timerunner
     {
         //The Sprites that make up the images to be scrolled
         //across the screen.
-        List<Sprite> mBackgroundSprites;
+        public List<Sprite> mBackgroundSprites;
 
         //The Sprite at the right end of the chain
-        Sprite mRightMostSprite;
+        public Sprite mRightMostSprite;
         //The Sprite at the left end of the chain
-        Sprite mLeftMostSprite;
+        public Sprite mLeftMostSprite;
 
         //The viewing area for drawing the Scrolling background images within
-        Viewport mViewport;
+        public Viewport mViewport;
 
         //The Direction to scroll the background images
         public enum HorizontalScrollDirection
@@ -37,7 +37,7 @@ namespace timerunner
             mViewport = theViewport;
         }
 
-        public void LoadContent(ContentManager theContentManager)
+        public virtual void LoadContent(ContentManager theContentManager)
         {
             //Clear the Sprites currently stored as the left and right ends of the chain
             mRightMostSprite = null;
@@ -117,7 +117,7 @@ namespace timerunner
         }
 
         //Update the posotin of the background images
-        public void Update(GameTime theGameTime, int theSpeed, HorizontalScrollDirection theDirection)
+        public virtual void Update(GameTime theGameTime, int theSpeed, HorizontalScrollDirection theDirection)
         {
             if (theDirection == HorizontalScrollDirection.Left)
             {

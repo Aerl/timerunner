@@ -16,3 +16,9 @@ Content\Effect.xnb
 Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
+Content\level2a.xnb
+Content\level2b.xnb
+Content\level2c.xnb
+Content\level2d.xnb
+Content\level2e.xnb
+Content\level2f.xnb

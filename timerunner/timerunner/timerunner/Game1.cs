@@ -24,7 +24,9 @@ namespace timerunner
         bool monsterVisible = false;
 
         //Create a Horizontally scrolling background
-        HorizontallyScrollingBackground mScrollingBackground;
+        HorizontallyScrollingBackground mScrollingBackgroundsky;
+        randombackground mScrollingBackgroundlandscape;
+        randombackground mScrollingBackgroundfront;
 
         Player firstPlayerSprite;
         Monster monsterTrial;
@@ -101,15 +103,30 @@ namespace timerunner
             // TODO: Load any ResourceManagementMode.Automatic content
 
 
-            mScrollingBackground = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
+            mScrollingBackgroundsky = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
 
-            mScrollingBackground.AddBackground("sunrise");
-            mScrollingBackground.AddBackground("daywclouds");
-            mScrollingBackground.AddBackground("dusk");
-            mScrollingBackground.AddBackground("nightwstars");
+            mScrollingBackgroundsky.AddBackground("sunrise");
+            mScrollingBackgroundsky.AddBackground("daywclouds");
+            mScrollingBackgroundsky.AddBackground("dusk");
+            mScrollingBackgroundsky.AddBackground("nightwstars");
+
+            mScrollingBackgroundlandscape = new randombackground(this.GraphicsDevice.Viewport);
+
+            mScrollingBackgroundlandscape.AddBackground("level2a");
+            mScrollingBackgroundlandscape.AddBackground("level2b");
+            mScrollingBackgroundlandscape.AddBackground("level2c");
+            mScrollingBackgroundlandscape.AddBackground("level2d");
+            mScrollingBackgroundlandscape.AddBackground("level2e");
+            mScrollingBackgroundlandscape.AddBackground("level2f");
+
+            mScrollingBackgroundfront = new randombackground(this.GraphicsDevice.Viewport);
+
+            mScrollingBackgroundfront.AddBackground("level2a");
 
             //Load the content for the Scrolling background
-            mScrollingBackground.LoadContent(this.Content);
+            mScrollingBackgroundsky.LoadContent(this.Content);
+            mScrollingBackgroundlandscape.LoadContent(this.Content);
+            mScrollingBackgroundfront.LoadContent(this.Content);
 
             //Load the content for each platform
             foreach (Platform platform in platforms)
@@ -218,7 +235,10 @@ namespace timerunner
                 platform.Update(gameTime);
 
             //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
-            mScrollingBackground.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
+            //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
+            mScrollingBackgroundsky.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
+            mScrollingBackgroundlandscape.Update(gameTime, 210, randombackground.HorizontalScrollDirection.Left);
+            mScrollingBackgroundfront.Update(gameTime, 260, randombackground.HorizontalScrollDirection.Left);
 
             //foreach (Platform platform in platforms)
             //    if (firstPlayerSprite.rectangle.isOnTopOf(platform.rectangle))
@@ -256,7 +276,9 @@ namespace timerunner
         {
             spriteBatch.Begin();
 
-            mScrollingBackground.Draw(spriteBatch);
+            mScrollingBackgroundsky.Draw(spriteBatch);
+            mScrollingBackgroundlandscape.Draw(spriteBatch);
+            mScrollingBackgroundfront.Draw(spriteBatch);
 
             foreach (Platform platform in platforms)
                 platform.Draw(this.spriteBatch);
