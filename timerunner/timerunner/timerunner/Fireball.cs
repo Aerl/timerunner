@@ -33,6 +33,8 @@ namespace timerunner
             if (Vector2.Distance(mStartPosition, Position) > MAX_DISTANCE)
             {
                 Visible = false;
+                Position.X = 2000;
+                Size.X = 2000;
             }
 
             if (Visible == true)

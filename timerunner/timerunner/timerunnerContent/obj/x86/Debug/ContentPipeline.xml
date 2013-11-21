@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb</Output>
-      <Time>2013-11-20T16:24:42.9262481-06:00</Time>
+      <Time>2013-11-20T16:24:42.7832399-06:00</Time>
     </Item>
     <Item>
       <Source>knight.png</Source>
@@ -107,7 +107,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platform2.xnb</Output>
-      <Time>2013-11-20T16:24:42.750238-06:00</Time>
+      <Time>2013-11-20T16:24:42.749238-06:00</Time>
     </Item>
     <Item>
       <Source>Platform.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platform.xnb</Output>
-      <Time>2013-11-20T16:24:42.749238-06:00</Time>
+      <Time>2013-11-20T16:24:42.7462378-06:00</Time>
     </Item>
     <Item>
       <Source>deadWalrus.png</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\deadWalrus.xnb</Output>
-      <Time>2013-11-20T16:24:42.8092414-06:00</Time>
+      <Time>2013-11-20T17:04:12.3687724-06:00</Time>
     </Item>
     <Item>
       <Source>level2a.png</Source>

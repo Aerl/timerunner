@@ -17,7 +17,7 @@ namespace timerunner
         // Constants
         const string PLAYER_ASSETNAME = "knight";
         const float PLAYER_SPEED = 300; // Walking Speed
-        const double fireballEnergyIncrease = .003;
+        const double fireballEnergyIncrease = .004;
         
         
         const float MOVE_UP = -1.9f; // Speed when jumping up
@@ -98,7 +98,7 @@ namespace timerunner
             base.LoadContent(theContentManager, PLAYER_ASSETNAME);
 
             // Set starting position for Player 
-            Position = new Vector2(((Position.X/2) - (texture.Width)-40) / 2, Position.Y - texture.Height - BOT_DIST);
+            Position = new Vector2(((Position.X/2) - (texture.Width)-60) / 2, Position.Y - texture.Height - BOT_DIST);
 
             //Load sound effect
             shootSound = theContentManager.Load<SoundEffect>("Effect");
@@ -216,7 +216,7 @@ namespace timerunner
                     {
                         aCreateNew = false;
                         aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
-                            new Vector2(200, 0), new Vector2(1, 0));
+                            new Vector2(200, 0), new Vector2(2, 0));
                         break;
                     }
                 }
@@ -226,7 +226,7 @@ namespace timerunner
                     Fireball aFireball = new Fireball();
                     aFireball.LoadContent(mContentManager);
                     aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
-                        new Vector2(200, 200), new Vector2(1, 0));
+                        new Vector2(200, 200), new Vector2(2, 0));
                     mFireballs.Add(aFireball);
                 }
         }

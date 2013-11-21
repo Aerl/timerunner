@@ -113,6 +113,8 @@ namespace timerunner
         /// </summary>
         protected override void LoadContent()
         {
+
+            IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Arial");
@@ -128,8 +130,6 @@ namespace timerunner
             fireballEnergyBar.LoadContent(this.Content);
 
             // TODO: Load any ResourceManagementMode.Automatic content
-
-            IsMouseVisible = true;
 
 
             mScrollingBackgroundsky = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
@@ -198,10 +198,13 @@ namespace timerunner
                 this.Exit();
 
             HelpClass.UpdateMouse();
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture)) && gameState == GameState.Gamebegin)
+            if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture)))
             {
+                
+                firstPlayerSprite.mCurrentState = Player.State.Falling;
                 gameState = GameState.Gaming;
                 startSprite.Position = new Vector2(-100, -100);
+                endSprite.Position = new Vector2(-100, -100);
             }
 
             // set intersectsPlatform to false befor testing
@@ -210,7 +213,6 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
             {
-
                 if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
                 {
                     // intersectsPlatform is set true if player intersects with any platform
@@ -256,10 +258,12 @@ namespace timerunner
                             }
                         }
                     }
-                    if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
+                    if (monsterTrial.mCurrentState != Monster.State.Dead)
                     {
-                        //monsterTrial.Hit();
-                        //f.Position.X = 1200;
+                        if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
+                        {
+                            GameOver();
+                        }
                     }
                     monsterTrial.Update(gameTime, monsterIntersectPlatform);
 
@@ -301,11 +305,17 @@ namespace timerunner
                 // check if player state is die
                 if (firstPlayerSprite.mCurrentState == Player.State.Die && gameState == GameState.Gaming)
                 {
-                    gameState = GameState.GameOver;
-                    endSprite.Position = new Vector2(WINDOW_WIDTH / 2 - endSprite.texture.Width / 2, WINDOW_HEIGHT / 2);
+                    GameOver();
                 }
             }
             base.Update(gameTime);
+        }
+
+        private void GameOver()
+        {
+            gameState = GameState.GameOver;
+            endSprite.Position = new Vector2(WINDOW_WIDTH / 2 - endSprite.texture.Width / 2, WINDOW_HEIGHT / 2);
+            //startSprite.Position = new Vector2(WINDOW_WIDTH / 2 - startSprite.texture.Width / 2, WINDOW_HEIGHT / 2 - 40);
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace timerunner
         ContentManager content;
 
         const int BOT_DIST = 50;
-        Vector2 mStartingPosition = new Vector2(1000, -300);
+        Vector2 mStartingPosition = new Vector2(900, 0);
 
         Vector2 mDirection = Vector2.Zero;
         Vector2 mSpeed = Vector2.Zero;
@@ -36,7 +36,7 @@ namespace timerunner
             Position = mStartingPosition;
             mSpeed.X = speed*2;
             mSpeed.Y = speed*2;
-            dyingHeight = 30;
+            dyingHeight = 20;
         }
 
         public enum State
