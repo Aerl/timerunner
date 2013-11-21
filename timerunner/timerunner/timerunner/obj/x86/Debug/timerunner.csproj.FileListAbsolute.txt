@@ -126,3 +126,5 @@ C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x8
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\level3h.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\start.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\gameover.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\start.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\gameover.xnb

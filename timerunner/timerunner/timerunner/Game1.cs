@@ -129,6 +129,8 @@ namespace timerunner
 
             // TODO: Load any ResourceManagementMode.Automatic content
 
+            IsMouseVisible = true;
+
 
             mScrollingBackgroundsky = new HorizontallyScrollingBackground(this.GraphicsDevice.Viewport);
 
