@@ -16,12 +16,12 @@ namespace timerunner
     {
         // Constants
         const string PLAYER_ASSETNAME = "knight";
-        const float PLAYER_SPEED = 300; // Walking Speed
         const double fireballEnergyIncrease = .004;
         
         
-        const float MOVE_UP = -1.9f; // Speed when jumping up
-        const float MOVE_DOWN = 1.7f;  // Speed when coming down after jump
+        public const float MOVE_UP = -3; // Speed when jumping up
+        public float MOVE_DOWN = 3;  // Speed when coming down after jump
+        public const int MOVE_RIGHT = -1;
 
         public double fireballEnergyPercentage = 0;
         
@@ -30,7 +30,7 @@ namespace timerunner
         bool Injured = false;
 
         float BOT_DIST = 0; //Initialising distance from the ground, set again in the constructor
-        float MAX_JUMP_HEIGHT = 0; // is set again in the constructor
+        public int MAX_JUMP_HEIGHT = 0; // is set again in the constructor
         Vector2 mStartingPosition = Vector2.Zero;
         public List<Fireball> mFireballs = new List<Fireball>();
         ContentManager mContentManager;
@@ -45,6 +45,9 @@ namespace timerunner
         Rectangle currentSprite;
         int spriteWidth;
         int spriteHeight;
+
+        //Score
+        public float score=0;
 
         public enum State
         {
@@ -61,12 +64,13 @@ namespace timerunner
         KeyboardState mPreviousKeyboardState;
         
 
-        public Player(int WindowWidth, int WindowHeight, float jumpheight, float start)
+        public Player(int WindowWidth, int WindowHeight, int jumpheight, float start, int gameSpeed)
         {
             Position = new Vector2(WindowWidth, WindowHeight);
             MAX_JUMP_HEIGHT = jumpheight;
             BOT_DIST = start;
-
+            mSpeed.X = gameSpeed;
+            mSpeed.Y = gameSpeed;
             // Prepare frames and spritesheet for running animation
             currentFrame = 0;
             totalFrames = 8;
@@ -107,10 +111,10 @@ namespace timerunner
         public void Update(GameTime theGameTime, bool intersects)
         {
             KeyboardState aCurrentKeyboardState = Keyboard.GetState();
-            mSpeed = new Vector2(PLAYER_SPEED, PLAYER_SPEED);
             UpdateFalling(intersects);
             UpdateJump(aCurrentKeyboardState);
             UpdateFireball(theGameTime, aCurrentKeyboardState);
+            UpdateScore();
 
             mPreviousKeyboardState = aCurrentKeyboardState;
 
@@ -216,7 +220,7 @@ namespace timerunner
                     {
                         aCreateNew = false;
                         aFireball.Fire(Position + new Vector2(Size.Width / 2, Size.Height / 2),
-                            new Vector2(200, 0), new Vector2(2, 0));
+                            mSpeed, new Vector2(2, 0));
                         break;
                     }
                 }
@@ -239,6 +243,11 @@ namespace timerunner
                 currentFrame = 0;
 
             currentSprite.X = currentFrame * spriteWidth;
+        }
+
+        public void UpdateScore()
+        {
+            score += 1;
         }
 
     }

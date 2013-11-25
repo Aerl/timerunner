@@ -29,7 +29,10 @@ Content\level3g.xnb
 Content\level3h.xnb
 Content\start.xnb
 Content\gameover.xnb
+Content\MeleeAnimation.xnb
 Content\Effect.xnb
 Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
+Content\Dragon.xnb
+Content\deadDragon.xnb

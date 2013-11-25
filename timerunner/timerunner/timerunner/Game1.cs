@@ -18,8 +18,8 @@ namespace timerunner
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        int speedOfGround = 200;
 
+        public int platformIntersectY=0;
         float randomStarter = 0;
         bool monsterVisible = false;
 
@@ -34,6 +34,7 @@ namespace timerunner
         List<Platform> platforms = new List<Platform>();
         SpriteFont font;
         Sprite startSprite, endSprite;
+        Random randomMonsterNumber = new Random();
 
         //PlatForm 
         Platform currentPlatForm, outScreenPlatForm;
@@ -50,7 +51,7 @@ namespace timerunner
         bool monsterIntersectPlatform;
 
         // Player and Window Constants
-        const float PLAYER_JUMP_HEIGHT = 300;
+        const int PLAYER_JUMP_HEIGHT = 300;
         const float PLAYER_INIT_HEIGHT = 500;
         const int WINDOW_HEIGHT = 700;
         const int WINDOW_WIDTH = 1000;
@@ -62,6 +63,12 @@ namespace timerunner
             Gaming,
             GameOver
         }
+
+        //Game Speed
+        public static int gameSpeed = 300;
+        public static float gameCounter = 0;
+        const int GAME_SPEED_INCREASE = 0;
+        const int GAME_COUNTER_RESET = 500;
 
         public GameState gameState;
 
@@ -84,14 +91,14 @@ namespace timerunner
         protected override void Initialize()
         {
             // Initialize Player
-            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT);
+            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT, gameSpeed);
 
             fireballEnergyBar = new FireballEnergyBar();
 
             // Initialize Platforms
-            currentPlatForm = new Platform("Platform", new Vector2(30, 400));
+            currentPlatForm = new Platform("Platform", new Vector2(30, 400),gameSpeed);
             platforms.Add(currentPlatForm);
-            outScreenPlatForm = new Platform("Platform", new Vector2(1300, -350));
+            outScreenPlatForm = new Platform("Platform", new Vector2(1300, -350),gameSpeed);
             platforms.Add(outScreenPlatForm);
 
             //Initialize letter sprites
@@ -113,7 +120,7 @@ namespace timerunner
         /// </summary>
         protected override void LoadContent()
         {
-
+            
             IsMouseVisible = true;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -193,6 +200,16 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (gameState == GameState.Gaming)
+            {
+                gameCounter++;
+                if (gameCounter > GAME_COUNTER_RESET)
+                {
+                    gameSpeed += GAME_SPEED_INCREASE;
+                    gameCounter = 0;
+                }
+            }
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -213,12 +230,24 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
             {
-                if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
+                if (HelpClass.TopHitDetection(platform, firstPlayerSprite))
                 {
-                    // intersectsPlatform is set true if player intersects with any platform
-                    intersectsPlatform = true;
-                    break;
+                    if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
+                    {
+                        // intersectsPlatform is set true if player intersects with any platform
+                        intersectsPlatform = true;
+                        platformIntersectY = platform.Size.Y;
+                        break;
+                    }
                 }
+                else
+                    if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
+                    {
+                        // intersectsPlatform is set true if player intersects with any platform
+                        GameOver();
+                        break;
+                    }
+
             }
 
             if (gameState == GameState.Gaming)
@@ -248,7 +277,7 @@ namespace timerunner
                         {
                             if (HelpClass.IntersectPixel(f.Size, f.textureData, monsterTrial.Size, monsterTrial.textureData))
                             {
-                                monsterTrial.Hit();
+                                monsterTrial.Hit(ref firstPlayerSprite.score);
                                 f.Position.X = 2000;
                                 f.Size.X = 2000;
                             }
@@ -278,7 +307,7 @@ namespace timerunner
                 fireballEnergyBar.Update(gameTime);
 
                 foreach (Platform platform in platforms)
-                    platform.Update(gameTime);
+                     platform.Update(gameTime);
 
                 //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
                 //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
@@ -293,7 +322,7 @@ namespace timerunner
                     if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
                     {
                         Platform temp = currentPlatForm;
-                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(300, currentPlatForm.Position.Y, 400, Convert.ToInt32(1.9f * 300));
+                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(firstPlayerSprite.MOVE_DOWN * gameSpeed));
                         //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
                         currentPlatForm = outScreenPlatForm;
 
@@ -343,11 +372,14 @@ namespace timerunner
             fireballEnergyBar.Draw(this.spriteBatch,graphics,firstPlayerSprite.fireballEnergyPercentage);
 
             //Kimi: For debug purpose
-            spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
-            if (monsterVisible)
-            {
-                spriteBatch.DrawString(font, monsterTrial.Position.ToString(), new Vector2(10, 50), Color.White);
-            }
+            //spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
+            //if (monsterVisible)
+            //{
+            //    spriteBatch.DrawString(font, monsterTrial.Position.ToString(), new Vector2(10, 50), Color.White);
+            //}
+
+            //spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font,"Score: " + firstPlayerSprite.score.ToString(), new Vector2(10, 10), Color.White);
 
             startSprite.Draw(spriteBatch);
 
@@ -359,16 +391,18 @@ namespace timerunner
         }
 
 
-
-
-
-
-
-
         public void GenerateRandomMonster()
         {
             // Initialize Monters
-            monsterTrial = new Monster(speedOfGround);
+            int random = randomMonsterNumber.Next(0, 100);
+            if(random>50)
+            {
+                monsterTrial = new Dragon(gameSpeed);
+            }
+            else
+            {
+                monsterTrial = new Walrus(gameSpeed);
+            }
             
             // Load Monstercontent
             monsterTrial.LoadContent(this.Content);

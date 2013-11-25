@@ -14,28 +14,40 @@ namespace timerunner
 {
     class Monster : Sprite
     {
-
-        string monster_AssetName = "walrus";
-        const int MAX_JUMP_HEIGHT = 0;
-        const float MOVE_UP = -1.7f;
-        const int MOVE_LEFT = -1;
-        const int MOVE_RIGHT = 1;
-        const float MOVE_DOWN = 1.7f;
-        int health = 1;
-        int dyingHeight;
+        //Constants and items that are similar throughout
+        const float DIE_DOWN = 3;
+        const float DIE_UP = -3;
+        const float FALL = 3;
         ContentManager content;
+        Vector2 mDirection = Vector2.Zero;   
+        int dyingHeight;
+        FlyingState flyingState = FlyingState.FlyingDown;
 
-        const int BOT_DIST = 50;
+        //change in setup
+        string monster_AssetName;
+        string monster_DeadAssetName;
+        int moveLeft;
+        int moveRight;
+        int moveUp;
+        int moveDown;
+        int health;
+        public State mCurrentState;
+
         Vector2 mStartingPosition = new Vector2(900, 0);
 
-        Vector2 mDirection = Vector2.Zero;
-        Vector2 mSpeed = Vector2.Zero;
-
-        public Monster(int speed)
+        public void Setup(int speed, string assetName, string deadAssetName, int moveLeft, int moveRight, int moveUp, int moveDown, int health, Vector2 startingPosition, State currentState)
         {
+            monster_AssetName = assetName;
+            monster_DeadAssetName = deadAssetName;
+            this.moveLeft = moveLeft;
+            this.moveRight = moveRight;
+            this.moveUp = moveUp;
+            this.moveDown = moveDown;
+            this.health = health;
+            mCurrentState = currentState;
+            mStartingPosition = startingPosition;
             Position = mStartingPosition;
-            mSpeed.X = speed*2;
-            mSpeed.Y = speed*2;
+
             dyingHeight = 20;
         }
 
@@ -47,7 +59,11 @@ namespace timerunner
             Dead
         }
 
-        public State mCurrentState = State.Falling;
+        public enum FlyingState
+        {
+            FlyingUp,
+            FlyingDown
+        }
 
         public void LoadContent(ContentManager theContentManager)
         {
@@ -69,7 +85,29 @@ namespace timerunner
         {
             if (mCurrentState == State.Walking)
             {
-                mDirection.X = MOVE_LEFT;
+                mDirection.X = moveLeft;
+            }
+
+            if (mCurrentState == State.Flying)
+            {
+                mDirection.X = moveLeft;
+                if (Position.Y < 0)
+                {
+                    mDirection.Y = moveDown;
+                    flyingState = FlyingState.FlyingDown;
+                }
+                else if (Position.Y > 600)
+                {
+                    mDirection.Y = moveUp;
+                    flyingState = FlyingState.FlyingUp;
+                }
+                else
+                {
+                    if (flyingState == FlyingState.FlyingDown)
+                        mDirection.Y = moveDown;
+                    else
+                        mDirection.Y = moveUp;
+                }
             }
         }
 
@@ -84,7 +122,7 @@ namespace timerunner
                 }
                 else
                 {
-                    mDirection.Y = MOVE_DOWN;
+                    mDirection.Y = FALL;
                 }
 
             }
@@ -98,22 +136,23 @@ namespace timerunner
                 if (dyingHeight > 0)
                 {
                     dyingHeight--;
-                    mDirection.Y = MOVE_UP;
+                    mDirection.Y = DIE_UP;
                 }
                 else
                 {
-                    mDirection.Y = MOVE_DOWN;
+                    mDirection.Y = DIE_DOWN;
                 }
             }
         }
 
-        public void Hit()
+        public void Hit(ref float score)
         {
              health--;
-             if (health <= 0)
+             if (health == 0)
              {
                  mCurrentState = State.Dead;
-                 texture = content.Load<Texture2D>("deadWalrus"); 
+                 score += 1000;
+                 texture = content.Load<Texture2D>(monster_DeadAssetName); 
              }  
         }
     }

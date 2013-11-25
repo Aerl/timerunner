@@ -74,6 +74,15 @@ namespace timerunner
                 return false;
         } // end checkMouseClick
 
+        public static bool TopHitDetection(Sprite platform, Sprite sprite)
+        {
+            if (platform.Size.Top+15 >= sprite.Size.Bottom && platform.Size.Top-15<=sprite.Size.Bottom)
+            {
+                return true;
+            }
+            return false;
+        }
+
         #region other helper class
         public static bool IntersectPixel(Rectangle rect1, Color[] data1, Rectangle rect2, Color[] data2)
         {

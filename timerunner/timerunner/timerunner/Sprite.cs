@@ -10,6 +10,7 @@ namespace timerunner
 {
     class Sprite
     {
+        public int changeSpeed = 0;
         //The asset name for the Sprite's Texture
         public string AssetName;
 
@@ -26,6 +27,8 @@ namespace timerunner
         public Texture2D texture;
 
         public Color[] textureData;
+
+        public Vector2 mSpeed = Vector2.Zero;
 
         //When the scale is modified throught he property, the Size of the 
         //sprite is recalculated with the new scale applied.
@@ -63,11 +66,19 @@ namespace timerunner
         //Update the Sprite and change it's position based on the passed in speed, direction and elapsed time.
         public void Update(GameTime theGameTime, Vector2 theSpeed, Vector2 theDirection)
         {
-            Position += theDirection * theSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
+            ChangeSpeed();
+            Position += theDirection * mSpeed * (float)theGameTime.ElapsedGameTime.TotalSeconds;
             Size.X = Convert.ToInt32(Position.X);
             Size.Y = Convert.ToInt32(Position.Y);
         }
 
-
+        public void ChangeSpeed()
+        {
+            if (mSpeed.X != Game1.gameSpeed)
+            {
+                mSpeed.X = Game1.gameSpeed;
+                mSpeed.Y = Game1.gameSpeed;
+            }
+        }
     }
 }
