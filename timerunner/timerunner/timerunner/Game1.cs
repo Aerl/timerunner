@@ -67,7 +67,7 @@ namespace timerunner
         //Game Speed
         public static int gameSpeed = 300;
         public static float gameCounter = 0;
-        const int GAME_SPEED_INCREASE = 0;
+        const int GAME_SPEED_INCREASE = 100;
         const int GAME_COUNTER_RESET = 500;
 
         public GameState gameState;
@@ -322,7 +322,7 @@ namespace timerunner
                     if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
                     {
                         Platform temp = currentPlatForm;
-                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(firstPlayerSprite.MOVE_DOWN * gameSpeed));
+                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(firstPlayerSprite.MOVE_DOWN * 300));
                         //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
                         currentPlatForm = outScreenPlatForm;
 

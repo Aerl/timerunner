@@ -77,7 +77,7 @@ namespace timerunner
             if (mSpeed.X != Game1.gameSpeed)
             {
                 mSpeed.X = Game1.gameSpeed;
-                mSpeed.Y = Game1.gameSpeed;
+                mSpeed.Y = 300;
             }
         }
     }
