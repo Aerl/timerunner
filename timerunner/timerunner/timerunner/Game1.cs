@@ -17,7 +17,7 @@ namespace timerunner
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
 
         public int platformIntersectY=0;
         float randomStarter = 0;
@@ -63,6 +63,7 @@ namespace timerunner
             Gaming,
             GameOver
         }
+        public GameState gameState;
 
         //Game Speed
         public static int gameSpeed = 300;
@@ -70,7 +71,24 @@ namespace timerunner
         const int GAME_SPEED_INCREASE = 100;
         const int GAME_COUNTER_RESET = 500;
 
-        public GameState gameState;
+        //add for animation
+        List<GameEntity> entities = new List<GameEntity>();
+
+        public List<GameEntity> Entities
+        {
+            get { return entities; }
+            set { entities = value; }
+        }
+
+        private static Game1 instance;
+
+        public static Game1 Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
 
         public Game1()
         {
@@ -80,6 +98,7 @@ namespace timerunner
             graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
             Content.RootDirectory = "Content";
+            instance = this; //add for animation
         }
 
         /// <summary>
@@ -110,6 +129,10 @@ namespace timerunner
             // Initialize Animation Properties
             frameTimer = 0;
             frameInterval = 80f;
+
+            Runner runner = new Runner();
+            runner.Position.X += 100;
+            entities.Add(runner);
 
             base.Initialize();
         }
@@ -175,6 +198,12 @@ namespace timerunner
             foreach (Platform platform in platforms)
             {
                 platform.LoadContent(this.Content);
+            }
+
+            // Create a new SpriteBatch, which can be used to draw textures.
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].LoadContent();
             }
 
             //Load sound effect
@@ -336,6 +365,11 @@ namespace timerunner
                 {
                     GameOver();
                 }
+
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].Update(gameTime);
+                }
             }
             base.Update(gameTime);
         }
@@ -384,6 +418,11 @@ namespace timerunner
             startSprite.Draw(spriteBatch);
 
             endSprite.Draw(spriteBatch);
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].Draw(gameTime);
+            }
 
             spriteBatch.End();
 
