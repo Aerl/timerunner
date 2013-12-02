@@ -5,11 +5,32 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace timerunner
 {
-    public class Runner : AnimatedSprite
+    class Runner : AnimatedSprite
     {
+        //Variables
+        public const float MOVE_UP = -15;
+        public const float MOVE_DOWN =15; 
+        public int MAX_JUMP_HEIGHT = 300; 
+
+        public bool intersects;
+
+        public float startJumpPosition = 0;
+
+        //Score
+        public float score = 0;
+        
+        //fireball
+        const double fireballEnergyIncrease = .004;
+        public double fireballEnergyPercentage = 0;
+        public List<Fireball> mFireballs = new List<Fireball>();
+
+        //Sound
+        SoundEffect shootSound;
+
         public enum State
         {
             Walking,Jumping,Falling,Die
@@ -19,23 +40,23 @@ namespace timerunner
         public Runner()
             : base()
         {
-            Animations.Add("walking", new Animation(new Vector2(10, 10), 90, 140, 0, 0, 7));
-            Position = new Vector2(100, 100);
+            Animations.Add("walking", new Animation(new Vector2(0, 0), 44, 68, 0, 0, 7));
+            Position = new Vector2(120, 170);
             CurrentAnimation = "walking";
         }
 
         public override void LoadContent()
         {
-            Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites");
+            Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites1");
             base.LoadContent();
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime) 
         {
             KeyboardState kState = Keyboard.GetState();
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float speed = 50.0f;
-            Animating = false;
+            float speed = 200.0f;
+            Animating = true;
 
             if (kState.IsKeyDown(Keys.Q))
             {
@@ -48,41 +69,50 @@ namespace timerunner
                 Animating = true;
             }
 
-            //if()
-
-            HandleState();
-
+            UpdateState(intersects, kState);
             base.Update(gameTime);
+
+            //if the player is under the game screen, then die
+            if (this.Position.Y > 700)
+            {
+                currentState = State.Die;
+            }
+            
         }
 
-        private void HandleState()
+        private void UpdateState(bool onPlatform, KeyboardState aCurrentKeyboardState)
         {
-            if (currentState == State.Falling)  //falling
+            if (currentState == State.Falling)
             {
-                if (false) // on top of the platform
+                if (onPlatform)
                 {
                     currentState = State.Walking;
                 }
                 else
+                    Position.Y += MOVE_DOWN;
+            }
+ 
+            if (currentState == State.Walking)
+            {
+                if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true)
                 {
-                    Position.Y -= 10;
+                    startJumpPosition = Position.Y;
+                    currentState = State.Jumping;
+                }
+                if (!onPlatform)
+                {
+                    currentState = State.Falling;
                 }
             }
 
-            //if (currentState == State.Jumping)  //jumping
-            //{
-            //    if (Position.Y - Position.Y > MAX_JUMP_HEIGHT)
-            //    {
-            //        mCurrentState = State.Falling;
-            //    }
-
-            //    if (Position.Y > mStartingPosition.Y)
-            //    {
-            //        Position.Y = mStartingPosition.Y;
-            //        mCurrentState = State.Walking;
-            //        mDirection = Vector2.Zero;
-            //    }
-            //}
+            if (currentState == State.Jumping)
+            {
+                Position.Y += MOVE_UP;
+                if (startJumpPosition - Position.Y > MAX_JUMP_HEIGHT)
+                {
+                    currentState = State.Falling;
+                }
+            }
         }
     }
 }

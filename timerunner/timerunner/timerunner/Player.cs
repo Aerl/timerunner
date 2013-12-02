@@ -38,13 +38,6 @@ namespace timerunner
         //Sound
         SoundEffect shootSound;
 
-        //Animation
-        int currentFrame;
-        int totalFrames;
-        Texture2D spriteSheet;
-        Rectangle currentSprite;
-        int spriteWidth;
-        int spriteHeight;
 
         //Score
         public float score=0;
@@ -71,14 +64,6 @@ namespace timerunner
             BOT_DIST = start;
             mSpeed.X = gameSpeed;
             mSpeed.Y = gameSpeed;
-            // Prepare frames and spritesheet for running animation
-            currentFrame = 0;
-            totalFrames = 8;
-            // ??? This is hard with how we are loading content...it's
-            // ??? tricky to keep sprite information out of the Game class.
-            //spriteWidth = spriteSheet.Width / totalFrames;
-            //spriteHeight = spriteSheet.Height;
-            //currentSprite = new Rectangle(currentFrame * spriteWidth, 0, spriteWidth, spriteHeight);
         }
 
         // Override Draw Function to draw fireballs
@@ -233,16 +218,6 @@ namespace timerunner
                         new Vector2(200, 200), new Vector2(2, 0));
                     mFireballs.Add(aFireball);
                 }
-        }
-
-        public void animateRunning()
-        {
-            if (currentFrame < (totalFrames - 1))
-                currentFrame++;
-            else
-                currentFrame = 0;
-
-            currentSprite.X = currentFrame * spriteWidth;
         }
 
         public void UpdateScore()

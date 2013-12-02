@@ -104,6 +104,14 @@ namespace timerunner
             return false;
         }
 
+        public static bool IsOnTopOf(Runner r1, Platform r2)
+        {
+            return (r1.Position.Y >= r2.Position.Y - r2.texture.Bounds.Height / 2 - 4 &&
+                    r1.Position.Y - r1.SourceRect.Height/2<= r2.Position.Y - r2.texture.Bounds.Height/2 + 1 &&
+                    r1.Position.X >= r2.Position.X &&
+                    r1.Position.X - r1.SourceRect.Width /2 <= r2.Position.X + r2.texture.Bounds.Width);
+        }
+
         //We need to figure out changeInX and changeInY
         public static Vector2 GenerateRandomLandLocation(int max, float yPreviousLocation, int changeInX, int changeInY)
         {
