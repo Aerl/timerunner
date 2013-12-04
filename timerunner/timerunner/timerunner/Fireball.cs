@@ -21,9 +21,14 @@ namespace timerunner
 
         String name = "Fireball";
 
-        public void LoadContent(ContentManager theContentManager)
+        public void LoadContent(Texture2D tex, String theAssetName)
         {
-            base.LoadContent(theContentManager, name);
+            texture = tex;
+            AssetName = theAssetName;
+            Size = new Rectangle((int)Position.X, (int)Position.Y, (int)(texture.Width * Scale), (int)(texture.Height * Scale));
+            //Creates an array of pixels
+            textureData = new Color[texture.Width * texture.Height];
+            texture.GetData(textureData);
             Scale = scale;
 
         }

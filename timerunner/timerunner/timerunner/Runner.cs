@@ -27,6 +27,7 @@ namespace timerunner
         const double fireballEnergyIncrease = .004;
         public double fireballEnergyPercentage = 0;
         public List<Fireball> mFireballs = new List<Fireball>();
+        private Texture2D Fire;
 
         //Sound
         SoundEffect shootSound;
@@ -48,6 +49,7 @@ namespace timerunner
         public override void LoadContent()
         {
             Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites1");
+            Fire = Game1.Instance.Content.Load<Texture2D>("Fireball");
             base.LoadContent();
         }
 
@@ -69,6 +71,7 @@ namespace timerunner
                 Animating = true;
             }
 
+            UpdateFireball(gameTime, kState);
             UpdateState(intersects, kState);
             base.Update(gameTime);
 
@@ -112,6 +115,49 @@ namespace timerunner
                 {
                     currentState = State.Falling;
                 }
+            }
+        }
+
+        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState)
+        {
+            foreach (Fireball aFireball in mFireballs)
+            {
+                aFireball.Update(theGameTime);
+            }
+
+            if (aCurrentKeyboardState.IsKeyDown(Keys.Space))
+            {
+                if (fireballEnergyPercentage > .333)
+                {
+                    ShootFireball();
+                    shootSound.Play();
+                    fireballEnergyPercentage -= .333;
+                }
+            }
+        }
+
+        private void ShootFireball()
+        {
+
+            bool aCreateNew = true;
+            foreach (Fireball aFireball in mFireballs)
+            {
+                if (aFireball.Visible == false)
+                {
+                    aCreateNew = false;
+                    aFireball.Fire(Position + new Vector2(Sprite.Width / 2, Sprite.Height / 2),
+                    new Vector2(1,1), new Vector2(2, 0));
+                    break;
+                }
+            }
+
+            if (aCreateNew == true)
+            {
+                Fireball aFireball = new Fireball();
+                aFireball.LoadContent(Fire, "Fireball");
+                aFireball.Fire(Position + new Vector2(Sprite.Width / 2, Sprite.Height / 2),
+                    new Vector2(200, 200), new Vector2(2, 0));
+                mFireballs.Add(aFireball);
             }
         }
     }

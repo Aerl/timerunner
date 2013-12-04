@@ -28,7 +28,6 @@ namespace timerunner
         randombackground mScrollingBackgroundlandscape;
         randombackground mScrollingBackgroundfront;
 
-        Player firstPlayerSprite;
         Runner runner;
         Monster monsterTrial;
         FireballEnergyBar fireballEnergyBar;
@@ -110,9 +109,6 @@ namespace timerunner
         /// </summary>
         protected override void Initialize()
         {
-            // Initialize Player
-            firstPlayerSprite = new Player(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, PLAYER_JUMP_HEIGHT, PLAYER_INIT_HEIGHT, gameSpeed);
-
             fireballEnergyBar = new FireballEnergyBar();
 
             // Initialize Platforms
@@ -155,9 +151,7 @@ namespace timerunner
             endSprite.texture = Content.Load<Texture2D>("gameover");
             endSprite.Position = new Vector2(-100, -100);
 
-            // Load Playercontent
-            firstPlayerSprite.LoadContent(this.Content);
-
+            
             fireballEnergyBar.LoadContent(this.Content);
 
             // TODO: Load any ResourceManagementMode.Automatic content
@@ -248,7 +242,7 @@ namespace timerunner
             if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture)))
             {
                 
-                firstPlayerSprite.mCurrentState = Player.State.Falling;
+                runner.currentState = Runner.State.Falling;
                 gameState = GameState.Gaming;
                 startSprite.Position = new Vector2(-100, -100);
                 endSprite.Position = new Vector2(-100, -100);
@@ -291,7 +285,6 @@ namespace timerunner
             if (gameState == GameState.Gaming)
             {
                 // hands intersectsPlatform to player class
-                firstPlayerSprite.Update(gameTime, intersectsPlatform);
                 runner.intersects = intersectsPlatform;
 
                 RandomMonsterGenerator();
@@ -308,11 +301,11 @@ namespace timerunner
                         }
                     }
                     //use for if a fireball hits a monster
-                    foreach (Fireball f in firstPlayerSprite.mFireballs)
+                    foreach (Fireball f in runner.mFireballs)
                     {
                         if (HelpClass.IntersectPixel(f.Size, f.textureData, monsterTrial.Size, monsterTrial.textureData))
                         {
-                            monsterTrial.Hit(ref firstPlayerSprite.score);
+                            monsterTrial.Hit(ref runner.score);
                             f.Position.X = 2000;
                             f.Size.X = 2000;
                         }
@@ -323,7 +316,8 @@ namespace timerunner
                     }
                     if (monsterTrial.mCurrentState != Monster.State.Dead)
                     {
-                        if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
+                        Rectangle Size = new Rectangle((int)runner.Position.X, (int)runner.Position.Y, (int)(runner.Sprite.Width), (int)(runner.Sprite.Height));
+                        if (HelpClass.IntersectPixel(Size, new Color[runner.Sprite.Width * runner.Sprite.Height], monsterTrial.Size, monsterTrial.textureData))
                         {
                             GameOver();
                         }
@@ -356,7 +350,7 @@ namespace timerunner
                     if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
                     {
                         Platform temp = currentPlatForm;
-                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(firstPlayerSprite.MOVE_DOWN * 300));
+                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(Runner.MOVE_DOWN * 300));
                         //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
                         currentPlatForm = outScreenPlatForm;
 
@@ -366,7 +360,7 @@ namespace timerunner
                 }
 
                 // check if player state is die
-                if (firstPlayerSprite.mCurrentState == Player.State.Die && gameState == GameState.Gaming)
+                if (runner.currentState == Runner.State.Die && gameState == GameState.Gaming)
                 {
                     GameOver();
                 }
@@ -400,15 +394,13 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
                 platform.Draw(this.spriteBatch);
-
-            firstPlayerSprite.Draw(this.spriteBatch);
-
+            
             if (monsterVisible == true)
             {
                 monsterTrial.Draw(this.spriteBatch);
             }
 
-            fireballEnergyBar.Draw(this.spriteBatch,graphics,firstPlayerSprite.fireballEnergyPercentage);
+            fireballEnergyBar.Draw(this.spriteBatch,graphics,runner.fireballEnergyPercentage);
 
             //Kimi: For debug purpose
             //spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
@@ -417,7 +409,7 @@ namespace timerunner
             //    spriteBatch.DrawString(font, monsterTrial.Position.ToString(), new Vector2(10, 50), Color.White);
             //}
 
-            spriteBatch.DrawString(font,"Score: " + firstPlayerSprite.score.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font,"Score: " + runner.score.ToString(), new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(font, "Position: " + runner.Position.Y.ToString(), new Vector2(10, 30), Color.White);
             spriteBatch.DrawString(font, "State: " + runner.currentState.ToString(), new Vector2(10, 50), Color.White);
             spriteBatch.DrawString(font, "runner.intersects: " + (runner.intersects).ToString(), new Vector2(10, 70), Color.White);
