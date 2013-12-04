@@ -47,7 +47,7 @@ namespace timerunner
 
         public override void LoadContent()
         {
-            Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites1");
+            assetName = "RunSprites1";
             base.LoadContent();
         }
 
@@ -71,6 +71,8 @@ namespace timerunner
 
             UpdateState(intersects, kState);
             base.Update(gameTime);
+
+            
 
             //if the player is under the game screen, then die
             if (this.Position.Y > 700)

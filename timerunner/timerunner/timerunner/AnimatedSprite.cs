@@ -12,6 +12,14 @@ namespace timerunner
     {
         float timer = 0f;
 
+        public string assetName = "";
+
+        public Rectangle Size = new Rectangle();
+
+        public Color[] textureData;
+
+        public Texture2D texture;
+
         public float Timer
         {
             get { return timer; }
@@ -66,6 +74,7 @@ namespace timerunner
 
         public override void LoadContent()
         {
+            Sprite = Game1.Instance.Content.Load<Texture2D>(assetName);
 
         }
 
@@ -92,6 +101,19 @@ namespace timerunner
                 , (int)animation.Origin.Y
                 , animation.Width
                 , animation.Height);
+            
+            centre = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
+           
+            Size = new Rectangle((int)Position.X
+            , (int)Position.Y
+            , animation.Width
+            , animation.Height);
+
+            //textureData = new Color[Sprite.Width * Sprite.Height];
+            //Sprite.GetData<Color>(0, sourceRect, textureData, sourceRect.X * sourceRect.Y, sourceRect.Width * sourceRect.Height);
+
+            //textureData = new Color[Size.Width * Size.Height];
+            //Sprite.GetData<Color>(0, sourceRect, textureData, sourceRect.X * sourceRect.Y, sourceRect.Width * sourceRect.Height);
 
             centre = new Vector2(sourceRect.Width / 2, sourceRect.Height / 2);
 

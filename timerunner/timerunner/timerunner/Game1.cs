@@ -323,10 +323,16 @@ namespace timerunner
                     }
                     if (monsterTrial.mCurrentState != Monster.State.Dead)
                     {
-                        if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
-                        {
-                            GameOver();
-                        }
+                            if (HelpClass.IntersectPixel(runner.Size, runner.textureData, monsterTrial.Size, monsterTrial.textureData))
+                            {
+                                GameOver();
+                            }
+
+                            if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, monsterTrial.Size, monsterTrial.textureData))
+                            {
+                                GameOver();
+                            }
+                        
                     }
                     monsterTrial.Update(gameTime, monsterIntersectPlatform);
 
@@ -442,7 +448,7 @@ namespace timerunner
             int random = randomMonsterNumber.Next(0, 100);
             if(random>50)
             {
-                monsterTrial = new Dragon(gameSpeed);
+                monsterTrial = new Walrus(gameSpeed);
             }
             else
             {

@@ -12,7 +12,6 @@ C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x8
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.exe
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\timerunner.pdb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.csprojResolveAssemblyReference.cache
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
@@ -197,3 +196,5 @@ C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x8
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\deadDragon.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites1.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites1.xnb
