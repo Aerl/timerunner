@@ -204,8 +204,8 @@ namespace timerunner
             //Load sound effect
             backgroundSong = Content.Load<Song>("Song");
 
-            //MediaPlayer.Play(backgroundSong);
-            //MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundSong);
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>

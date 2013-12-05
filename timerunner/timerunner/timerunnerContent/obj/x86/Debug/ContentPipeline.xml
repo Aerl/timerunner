@@ -317,15 +317,6 @@
       <Time>2013-12-04T19:14:23.5807073-06:00</Time>
     </Item>
     <Item>
-      <Source>Effect.wav</Source>
-      <Name>Effect</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Effect.xnb</Output>
-      <Time>2013-12-04T14:57:24.3987936-06:00</Time>
-    </Item>
-    <Item>
       <Source>Song.mp3</Source>
       <Name>Song</Name>
       <Importer>Mp3Importer</Importer>
@@ -333,7 +324,7 @@
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.xnb</Output>
       <Extra>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.wma</Extra>
-      <Time>2013-12-04T14:57:24.4867987-06:00</Time>
+      <Time>2013-12-04T13:57:46.4291455-06:00</Time>
     </Item>
     <Item>
       <Source>Arial.spritefont</Source>
@@ -343,6 +334,15 @@
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Arial.xnb</Output>
       <Time>2013-12-04T14:57:24.3747923-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Effect.wav</Source>
+      <Name>Effect</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Effect.xnb</Output>
+      <Time>2013-12-04T19:49:55.9246704-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

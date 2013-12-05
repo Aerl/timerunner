@@ -34,6 +34,7 @@ namespace timerunner
         public bool SwordAttack = false;
         const int MELEE_TIME = 15; // time attack lasts
         int meleeCounter;
+       
         //Sound
         SoundEffect shootSound;
 
@@ -55,6 +56,7 @@ namespace timerunner
         {
             Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites1");
             Fire = Game1.Instance.Content.Load<Texture2D>("Fireball");
+            shootSound = Game1.Instance.Content.Load<SoundEffect>("Effect");
             base.LoadContent();
         }
 
@@ -162,7 +164,7 @@ namespace timerunner
                 if (fireballEnergyPercentage > .333)
                 {
                     ShootFireball();
-                    //shootSound.Play();
+                    shootSound.Play();
                     fireballEnergyPercentage -= .333;
                 }
             }
