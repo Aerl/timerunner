@@ -1,6 +1,5 @@
 Content\Fireball.xnb
 Content\walrus.xnb
-Content\knight.xnb
 Content\Fizz.xnb
 Content\day.xnb
 Content\dusk.xnb

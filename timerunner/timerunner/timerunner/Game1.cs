@@ -319,7 +319,14 @@ namespace timerunner
                         Rectangle Size = new Rectangle((int)runner.Position.X, (int)runner.Position.Y, (int)(runner.Sprite.Width), (int)(runner.Sprite.Height));
                         if (HelpClass.IntersectPixel(Size, new Color[runner.Sprite.Width * runner.Sprite.Height], monsterTrial.Size, monsterTrial.textureData))
                         {
-                            GameOver();
+                            if(runner.SwordAttack==false)
+                            {
+                                GameOver();
+                            }
+                            else
+                            {
+                                monsterTrial.mCurrentState = Monster.State.Dead;
+                            }
                         }
                     }
                     monsterTrial.Update(gameTime, monsterIntersectPlatform);
@@ -350,7 +357,7 @@ namespace timerunner
                     if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
                     {
                         Platform temp = currentPlatForm;
-                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, Convert.ToInt32(Runner.MOVE_DOWN * 300));
+                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, 900);
                         //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
                         currentPlatForm = outScreenPlatForm;
 
@@ -413,6 +420,7 @@ namespace timerunner
             spriteBatch.DrawString(font, "Position: " + runner.Position.Y.ToString(), new Vector2(10, 30), Color.White);
             spriteBatch.DrawString(font, "State: " + runner.currentState.ToString(), new Vector2(10, 50), Color.White);
             spriteBatch.DrawString(font, "runner.intersects: " + (runner.intersects).ToString(), new Vector2(10, 70), Color.White);
+            spriteBatch.DrawString(font, "runner.melee: " + (runner.SwordAttack).ToString(), new Vector2(10, 90), Color.White);
             startSprite.Draw(spriteBatch);
 
             endSprite.Draw(spriteBatch);
@@ -420,6 +428,14 @@ namespace timerunner
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].Draw(gameTime);
+            }
+
+            foreach (Fireball fireball in runner.mFireballs)
+            {
+                if (fireball.Visible == true)
+                {
+                    fireball.Draw(this.spriteBatch);
+                }
             }
 
             spriteBatch.End();

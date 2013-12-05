@@ -20,15 +20,6 @@
       <Time>2013-12-04T14:57:24.7078113-06:00</Time>
     </Item>
     <Item>
-      <Source>knight.png</Source>
-      <Name>knight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\knight.xnb</Output>
-      <Time>2013-12-04T14:57:24.5438019-06:00</Time>
-    </Item>
-    <Item>
       <Source>Fizz.png</Source>
       <Name>Fizz</Name>
       <Importer>TextureImporter</Importer>
@@ -323,7 +314,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites1.xnb</Output>
-      <Time>2013-12-04T14:57:24.4467964-06:00</Time>
+      <Time>2013-12-04T19:14:23.5807073-06:00</Time>
     </Item>
     <Item>
       <Source>Effect.wav</Source>
