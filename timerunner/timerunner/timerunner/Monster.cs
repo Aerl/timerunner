@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace timerunner
 {
-    class Monster : Sprite
+    public class Monster : Sprite
     {
         //Constants and items that are similar throughout
         const float DIE_DOWN = 3;
@@ -32,6 +32,7 @@ namespace timerunner
         int moveDown;
         int health;
         public State mCurrentState;
+        public bool intersects = false;
 
         Vector2 mStartingPosition = new Vector2(900, 0);
 
@@ -72,7 +73,7 @@ namespace timerunner
             Position = mStartingPosition;
         }
 
-        public void Update(GameTime theGameTime, bool intersects)
+        public void Update(GameTime theGameTime)
         {
             UpdateMovement();
             UpdateFalling(intersects);
@@ -154,6 +155,12 @@ namespace timerunner
                  score += 1000;
                  texture = content.Load<Texture2D>(monster_DeadAssetName); 
              }  
+        }
+
+        public void HitByMelee(ref float score)
+        {
+            health = 1;
+            Hit(ref score);
         }
     }
 }
