@@ -20,7 +20,6 @@ C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
-C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\knight.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\knight.xnb
@@ -244,3 +243,5 @@ C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Deb
 C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.exe
 C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites1.xnb

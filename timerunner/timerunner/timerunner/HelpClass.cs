@@ -104,12 +104,32 @@ namespace timerunner
             return false;
         }
 
-        public static bool IsOnTopOf(Runner r1, Platform r2)
+        public static bool IntersectRunner(Runner r1, Sprite r2)
         {
-            return (r1.Position.Y >= r2.Position.Y - r2.texture.Bounds.Height / 2 - 4 &&
-                    r1.Position.Y - r1.SourceRect.Height/2<= r2.Position.Y - r2.texture.Bounds.Height/2 + 1 &&
-                    r1.Position.X >= r2.Position.X &&
-                    r1.Position.X - r1.SourceRect.Width /2 <= r2.Position.X + r2.texture.Bounds.Width);
+            Rectangle runnerRectangle = new Rectangle((int)r1.Position.X-14, (int)r1.Position.Y-45, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
+            string walrus = "walrus";
+
+            int arrayLength = r1.Animations[r1.CurrentAnimation].Width * r1.Animations[r1.CurrentAnimation].Height;
+
+             Color[] fullTextureData;
+             Color[] specificTextureData = new Color[arrayLength];
+
+             fullTextureData = new Color[r1.Sprite.Width * r1.Sprite.Height];
+             r1.Sprite.GetData(fullTextureData);
+
+            for(int i=r1.currentFrame * arrayLength; i< (r1.currentFrame+1) * arrayLength; i++)
+            {
+                specificTextureData[i - r1.currentFrame * arrayLength] = fullTextureData[i];
+            }
+            //r1.Sprite.GetData(
+            
+            return IntersectPixel(runnerRectangle,specificTextureData,r2.Size,r2.textureData);
+        }
+
+        public static bool IsOnTopOf(Runner r1, Platform platform)
+        {
+            Rectangle runnerRectangle = new Rectangle((int)r1.Position.X, (int)r1.Position.Y - 50, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
+            return platform.Size.Top+10 >= runnerRectangle.Bottom && platform.Size.Top-10<= runnerRectangle.Bottom && runnerRectangle.Left >= platform.Size.Left && runnerRectangle.Right - runnerRectangle.Width <= platform.Size.Right;
         }
 
         //We need to figure out changeInX and changeInY

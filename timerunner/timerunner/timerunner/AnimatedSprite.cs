@@ -24,7 +24,7 @@ namespace timerunner
             get { return interval; }
             set { interval = value; }
         }
-        int currentFrame = 0;
+        public int currentFrame = 0;
 
         string currentAnimation;
         bool animating;
@@ -40,7 +40,7 @@ namespace timerunner
             get { return currentAnimation; }
             set { currentAnimation = value; }
         }
-        Rectangle sourceRect;
+        public Rectangle sourceRect;
         Vector2 centre;
 
         Dictionary<string, Animation> animations = new Dictionary<string, Animation>();

@@ -68,8 +68,8 @@ namespace timerunner
         //Game Speed
         public static int gameSpeed = 200;
         public static float gameCounter = 0;
-        const int GAME_SPEED_INCREASE = 100;
-        const int GAME_COUNTER_RESET = 500;
+        const int GAME_SPEED_INCREASE = 50;
+        const int GAME_COUNTER_RESET = 300;
 
         //add for animation
         List<GameEntity> entities = new List<GameEntity>();
@@ -204,8 +204,8 @@ namespace timerunner
             //Load sound effect
             backgroundSong = Content.Load<Song>("Song");
 
-            MediaPlayer.Play(backgroundSong);
-            MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(backgroundSong);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -316,8 +316,7 @@ namespace timerunner
                     }
                     if (monsterTrial.mCurrentState != Monster.State.Dead)
                     {
-                        Rectangle Size = new Rectangle((int)runner.Position.X, (int)runner.Position.Y, (int)(runner.Sprite.Width), (int)(runner.Sprite.Height));
-                        if (HelpClass.IntersectPixel(Size, new Color[runner.Sprite.Width * runner.Sprite.Height], monsterTrial.Size, monsterTrial.textureData))
+                        if (HelpClass.IntersectRunner(runner,monsterTrial))
                         {
                             if(runner.SwordAttack==false)
                             {
@@ -450,11 +449,11 @@ namespace timerunner
             int random = randomMonsterNumber.Next(0, 100);
             if(random>50)
             {
-                monsterTrial = new Dragon(gameSpeed);
+                monsterTrial = new Walrus(gameSpeed);
             }
             else
             {
-                monsterTrial = new Walrus(gameSpeed);
+                monsterTrial = new Dragon(gameSpeed);
             }
             
             // Load Monstercontent

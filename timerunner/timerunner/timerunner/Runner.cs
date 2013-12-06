@@ -47,7 +47,7 @@ namespace timerunner
         public Runner()
             : base()
         {
-            Animations.Add("walking", new Animation(new Vector2(0, 0), 44, 68, 0, 0, 7));
+            Animations.Add("walking", new Animation(new Vector2(0, 0), 44, 80, 0, 0, 7));
             Position = new Vector2(120, 170);
             CurrentAnimation = "walking";
         }
