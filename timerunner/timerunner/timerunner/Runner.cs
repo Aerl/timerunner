@@ -12,8 +12,8 @@ namespace timerunner
     class Runner : AnimatedSprite
     {
         //Variables
-        public const float MOVE_UP = -14;
-        public float MOVE_DOWN =14; 
+        public const float MOVE_UP = -15;
+        public const float MOVE_DOWN =15; 
         public int MAX_JUMP_HEIGHT = 300; 
 
         public bool intersects;
@@ -62,7 +62,6 @@ namespace timerunner
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) 
         {
-            score++;
             KeyboardState kState = Keyboard.GetState();
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float speed = 200.0f;
@@ -162,11 +161,11 @@ namespace timerunner
 
             if (aCurrentKeyboardState.IsKeyDown(Keys.Space) && PreviousKeyboardState.IsKeyDown(Keys.Space) == false)
             {
-                if (fireballEnergyPercentage > .25)
+                if (fireballEnergyPercentage > .333)
                 {
                     ShootFireball();
                     shootSound.Play();
-                    fireballEnergyPercentage -= .25;
+                    fireballEnergyPercentage -= .333;
                 }
             }
         }

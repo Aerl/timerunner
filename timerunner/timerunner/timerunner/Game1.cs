@@ -21,7 +21,7 @@ namespace timerunner
 
         public int platformIntersectY=0;
         float randomStarter = 0;
-        
+        bool monsterVisible = false;
 
         //Create a Horizontally scrolling background
         HorizontallyScrollingBackground mScrollingBackgroundsky;
@@ -29,17 +29,7 @@ namespace timerunner
         randombackground mScrollingBackgroundfront;
 
         Runner runner;
-
-        //Monster variables
-        Monster monsterOne;
-        Monster secondMonster;
-        Monster thirdMonster;
-        bool monsterVisible = false;
-        bool secondMonsterVisible = false;
-        bool thirdMonsterVisible = false;
-        const int secondMonsterScore = 8000;
-        const int thirdMonsterScore = 16000;
-
+        Monster monsterTrial;
         FireballEnergyBar fireballEnergyBar;
         List<Platform> platforms = new List<Platform>();
         SpriteFont font;
@@ -58,6 +48,7 @@ namespace timerunner
 
         //Bool flag
         bool intersectsPlatform;
+        bool monsterIntersectPlatform;
 
         // Player and Window Constants
         const int PLAYER_JUMP_HEIGHT = 300;
@@ -75,12 +66,10 @@ namespace timerunner
         public GameState gameState;
 
         //Game Speed
-        public static int gameSpeed = 300;
+        public static int gameSpeed = 200;
         public static float gameCounter = 0;
-        const int GAME_SPEED_INCREASE = 25;
-        const int GAME_COUNTER_RESET = 750;
-        const float INTERVAL_INCREASE = .01f;
-        const int MAX_GAME_SPEED = 650;
+        const int GAME_SPEED_INCREASE = 50;
+        const int GAME_COUNTER_RESET = 300;
 
         //add for animation
         List<GameEntity> entities = new List<GameEntity>();
@@ -215,8 +204,8 @@ namespace timerunner
             //Load sound effect
             backgroundSong = Content.Load<Song>("Song");
 
-            MediaPlayer.Play(backgroundSong);
-            MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(backgroundSong);
+            //MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
@@ -235,13 +224,12 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (gameState == GameState.Gaming && gameSpeed <= MAX_GAME_SPEED)
+            if (gameState == GameState.Gaming)
             {
                 gameCounter++;
-                if (gameCounter > GAME_COUNTER_RESET )
+                if (gameCounter > GAME_COUNTER_RESET)
                 {
                     gameSpeed += GAME_SPEED_INCREASE;
-                    runner.Interval = (float)(runner.Interval - INTERVAL_INCREASE);
                     gameCounter = 0;
                 }
             }
@@ -266,7 +254,7 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
             {                    
-                if (HelpClass.IsRunnerOnTopOf(runner, platform))
+                if (HelpClass.IsOnTopOf(runner, platform))
                 {
                     intersectsPlatform = true;
                     platformIntersectY = platform.Size.Y;
@@ -303,78 +291,13 @@ namespace timerunner
 
                 if (monsterVisible == true)
                 {
-                    MonsterMethods(gameTime,monsterOne,ref monsterVisible);
-                }
-
-                if (secondMonsterVisible == true)
-                {
-                    MonsterMethods(gameTime,secondMonster, ref secondMonsterVisible);
-                }
-
-                if (thirdMonsterVisible == true)
-                {
-                    MonsterMethods(gameTime, thirdMonster, ref thirdMonsterVisible);
-                }
-
-                fireballEnergyBar.Update(gameTime);
-
-                foreach (Platform platform in platforms)
-                     platform.Update(gameTime);
-
-                //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
-                //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
-                mScrollingBackgroundsky.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
-                mScrollingBackgroundlandscape.Update(gameTime, 210, randombackground.HorizontalScrollDirection.Left);
-                mScrollingBackgroundfront.Update(gameTime, 260, randombackground.HorizontalScrollDirection.Left);
-
-                //generate the platforms
-                foreach (Platform platform in platforms)
-                {
-                    platform.Update(gameTime);
-                    if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
+                    foreach (Platform platform in platforms)
                     {
-                        Platform temp = currentPlatForm;
-                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, (int)(runner.MOVE_DOWN * 1 / (float)gameTime.ElapsedGameTime.TotalSeconds));
-                        //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
-                        currentPlatForm = outScreenPlatForm;
-
-                        outScreenPlatForm = temp;
-                        //platform.stop();
-                    }
-                }
-
-                // check if player state is die
-                if (runner.currentState == Runner.State.Die && gameState == GameState.Gaming)
-                {
-                    GameOver();
-                }
-
-                for (int i = 0; i < entities.Count; i++)
-                {
-                    entities[i].Update(gameTime);
-                }
-            }
-            base.Update(gameTime);
-        }
-
-        private void MonsterMethods(GameTime gameTime, Monster monsterTrial, ref bool monsterVisible)
-        {
-              foreach (Platform platform in platforms)
-              {
-                //if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
-                //{
-                //    // intersectsPlatform is set true if monster onPlatform with any platform
-                        //    monsterIntersectPlatform = true;
-                        //    break;
-                        //}
-
-                        if (HelpClass.IsMonsterInBounds(monsterTrial, platform))
+                        if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
                         {
-                            if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
-                            {
-                                monsterTrial.intersects = true;
-                                break;
-                            }
+                            // intersectsPlatform is set true if monster onPlatform with any platform
+                            monsterIntersectPlatform = true;
+                            break;
                         }
                     }
                     //use for if a fireball hits a monster
@@ -401,17 +324,59 @@ namespace timerunner
                             }
                             else
                             {
-                                monsterTrial.HitByMelee(ref runner.score);
+                                monsterTrial.mCurrentState = Monster.State.Dead;
                             }
                         }
                     }
-                    monsterTrial.Update(gameTime);
+                    monsterTrial.Update(gameTime, monsterIntersectPlatform);
 
                     if (monsterTrial.Size.X < -200 || monsterTrial.Size.Y > 1500)
                     {
                         monsterTrial = null;
                         monsterVisible = false;
+                        monsterIntersectPlatform = false;
                     }
+                }
+
+                fireballEnergyBar.Update(gameTime);
+
+                foreach (Platform platform in platforms)
+                     platform.Update(gameTime);
+
+                //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
+                //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
+                mScrollingBackgroundsky.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
+                mScrollingBackgroundlandscape.Update(gameTime, 210, randombackground.HorizontalScrollDirection.Left);
+                mScrollingBackgroundfront.Update(gameTime, 260, randombackground.HorizontalScrollDirection.Left);
+
+                //generate the platforms
+                foreach (Platform platform in platforms)
+                {
+                    platform.Update(gameTime);
+                    if ((currentPlatForm.Position.X + currentPlatForm.texture.Width) < 1000)
+                    {
+                        Platform temp = currentPlatForm;
+                        outScreenPlatForm.Position = HelpClass.GenerateRandomLandLocation(PLAYER_JUMP_HEIGHT, currentPlatForm.Position.Y, gameSpeed, 900);
+                        //outScreenPlatForm.Position = GenerateRandomLandLocation(Convert.ToInt32(firstPlayerSprite.MAX_JUMP_HEIGHT), currentPlatForm.PlatformSpeed(), Convert.ToInt32(currentPlatForm.Position.Y), Convert.ToInt32(firstPlayerSprite.MOVE_UP));
+                        currentPlatForm = outScreenPlatForm;
+
+                        outScreenPlatForm = temp;
+                        //platform.stop();
+                    }
+                }
+
+                // check if player state is die
+                if (runner.currentState == Runner.State.Die && gameState == GameState.Gaming)
+                {
+                    GameOver();
+                }
+
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].Update(gameTime);
+                }
+            }
+            base.Update(gameTime);
         }
 
         private void GameOver()
@@ -438,20 +403,8 @@ namespace timerunner
             
             if (monsterVisible == true)
             {
-                monsterOne.Draw(this.spriteBatch);
+                monsterTrial.Draw(this.spriteBatch);
             }
-
-            if (secondMonsterVisible == true)
-            {
-                secondMonster.Draw(this.spriteBatch);
-            }
-
-            if (thirdMonsterVisible == true)
-            {
-                thirdMonster.Draw(this.spriteBatch);
-            }
-
-            
 
             fireballEnergyBar.Draw(this.spriteBatch,graphics,runner.fireballEnergyPercentage);
 
@@ -463,12 +416,10 @@ namespace timerunner
             //}
 
             spriteBatch.DrawString(font,"Score: " + runner.score.ToString(), new Vector2(10, 10), Color.White);
-            //spriteBatch.DrawString(font, "Game Speed: " + gameSpeed.ToString(), new Vector2(10, 50), Color.White);
-            //spriteBatch.DrawString(font, "Position: " + runner.Position.Y.ToString(), new Vector2(10, 30), Color.White);
-            //spriteBatch.DrawString(font, "State: " + runner.currentState.ToString(), new Vector2(10, 50), Color.White);
-            //spriteBatch.DrawString(font, "runner.intersects: " + (runner.intersects).ToString(), new Vector2(10, 70), Color.White);
-            //spriteBatch.DrawString(font, "runner.melee: " + (runner.SwordAttack).ToString(), new Vector2(10, 90), Color.White);
-
+            spriteBatch.DrawString(font, "Position: " + runner.Position.Y.ToString(), new Vector2(10, 30), Color.White);
+            spriteBatch.DrawString(font, "State: " + runner.currentState.ToString(), new Vector2(10, 50), Color.White);
+            spriteBatch.DrawString(font, "runner.intersects: " + (runner.intersects).ToString(), new Vector2(10, 70), Color.White);
+            spriteBatch.DrawString(font, "runner.melee: " + (runner.SwordAttack).ToString(), new Vector2(10, 90), Color.White);
             startSprite.Draw(spriteBatch);
 
             endSprite.Draw(spriteBatch);
@@ -492,28 +443,28 @@ namespace timerunner
         }
 
 
-        public void GenerateRandomMonster(ref Monster monster, ref bool monsterVisible)
+        public void GenerateRandomMonster()
         {
             // Initialize Monters
             int random = randomMonsterNumber.Next(0, 100);
             if(random>50)
             {
-                monster = new Walrus(gameSpeed);
+                monsterTrial = new Walrus(gameSpeed);
             }
             else
             {
-                monster = new Dragon(gameSpeed);
+                monsterTrial = new Dragon(gameSpeed);
             }
             
             // Load Monstercontent
-            monster.LoadContent(this.Content);
+            monsterTrial.LoadContent(this.Content);
             monsterVisible = true;
         }
 
         private void RandomMonsterGenerator()
         {
             //Random Generation of Monsters
-            if (randomStarter < 300)
+            if (randomStarter < 300 && monsterVisible == false)
             {
                 randomStarter++;
             }
@@ -523,25 +474,7 @@ namespace timerunner
                 int possibleGenerationNumber = r.Next(0, 300);
                 if (possibleGenerationNumber == 50)
                 {
-                    GenerateRandomMonster(ref monsterOne, ref monsterVisible);
-                }
-            }
-            if (randomStarter>=300 && secondMonsterVisible == false && runner.score>secondMonsterScore)
-            {
-                Random r = new Random();
-                int possibleGenerationNumber = r.Next(0, 300);
-                if (possibleGenerationNumber == 60)
-                {
-                    GenerateRandomMonster(ref secondMonster, ref secondMonsterVisible);
-                }
-            }
-            if (randomStarter >= 300 && thirdMonsterVisible == false && runner.score > thirdMonsterScore)
-            {
-                Random r = new Random();
-                int possibleGenerationNumber = r.Next(0, 300);
-                if (possibleGenerationNumber == 70)
-                {
-                    GenerateRandomMonster(ref thirdMonster, ref thirdMonsterVisible);
+                    GenerateRandomMonster();
                 }
             }
         }

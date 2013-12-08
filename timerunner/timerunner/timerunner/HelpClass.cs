@@ -74,6 +74,15 @@ namespace timerunner
                 return false;
         } // end checkMouseClick
 
+        public static bool TopHitDetection(Sprite platform, Sprite sprite)
+        {
+            if (platform.Size.Top+15 >= sprite.Size.Bottom && platform.Size.Top-15<=sprite.Size.Bottom)
+            {
+                return true;
+            }
+            return false;
+        }
+
         #region other helper class
         public static bool IntersectPixel(Rectangle rect1, Color[] data1, Rectangle rect2, Color[] data2)
         {
@@ -117,28 +126,21 @@ namespace timerunner
             return IntersectPixel(runnerRectangle,specificTextureData,r2.Size,r2.textureData);
         }
 
-        public static bool IsRunnerOnTopOf(Runner r1, Platform platform)
+        public static bool IsOnTopOf(Runner r1, Platform platform)
         {
             Rectangle runnerRectangle = new Rectangle((int)r1.Position.X, (int)r1.Position.Y - 50, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
             return platform.Size.Top+10 >= runnerRectangle.Bottom && platform.Size.Top-10<= runnerRectangle.Bottom && runnerRectangle.Left >= platform.Size.Left && runnerRectangle.Right - runnerRectangle.Width <= platform.Size.Right;
         }
 
-        public static bool IsMonsterInBounds(Sprite monster, Platform platform)
-        {
-            Rectangle monsterRectangle = monster.Size;
-            return platform.Size.Top + 30 >= monsterRectangle.Bottom && platform.Size.Top - 30 <= monsterRectangle.Bottom && monsterRectangle.Left >= platform.Size.Left-50 && monsterRectangle.Right - monsterRectangle.Width <= platform.Size.Right;
-        }
-
         //We need to figure out changeInX and changeInY
         public static Vector2 GenerateRandomLandLocation(int max, float yPreviousLocation, int changeInX, int changeInY)
         {
-             double slope = (double)changeInY * -1 / (double)changeInX;
+            double slope = (double)changeInY * -1 / (double)changeInX;
             int yPrev = Convert.ToInt32(yPreviousLocation);
             int randomY = 0;
             int randomX = 0;
-            int ADJUST_X = 60 + changeInX/20;
             int maxJumpHeight = max - 30;
-            while (randomX < ADJUST_X)
+            while (randomX < 80)
             {
                 Random r = new Random();
                 if (yPrev - maxJumpHeight < 100)
@@ -147,22 +149,13 @@ namespace timerunner
                     randomY = r.Next(yPrev - maxJumpHeight, 600);
                 int x1 = Convert.ToInt32((randomY - yPrev) / slope);
                 int x2 = Convert.ToInt32((randomY - yPrev + 2 * maxJumpHeight) / (-1 * slope));
-
-                if (changeInX > changeInY)
+                if (randomY > yPrev)
                 {
-                    string walrus = "walrus";
+                    randomX = r.Next(0, x2);
                 }
-
-                if (x2 >  ADJUST_X + changeInX / 10)
+                else
                 {
-                    if (randomY > yPrev)
-                    {
-                        randomX = r.Next(ADJUST_X + changeInX / 10, x2);
-                    }
-                    else
-                    {
-                        randomX = r.Next(x1, x2);
-                    }
+                    randomX = r.Next(x1, x2);
                 }
             }
             return new Vector2(randomX + 1000, randomY);

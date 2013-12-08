@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace timerunner
 {
-    public class Sprite
+    class Sprite
     {
         public int changeSpeed = 0;
         //The asset name for the Sprite's Texture

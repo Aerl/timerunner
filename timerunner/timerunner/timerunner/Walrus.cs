@@ -17,7 +17,7 @@ namespace timerunner
         string deadAssetName = "deadWalrus";
         int moveLeft = -2;
         int moveRight = 1;
-        int health = 2;
+        int health = 1;
 
         public Walrus(int speed)
         {
