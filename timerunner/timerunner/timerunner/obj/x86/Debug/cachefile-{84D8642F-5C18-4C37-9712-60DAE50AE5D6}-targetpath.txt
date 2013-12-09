@@ -37,3 +37,6 @@ Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
 Content\Effect.xnb
+Content\KnightSprites.xnb
+Content\Platform2x.xnb
+Content\Platformx.xnb

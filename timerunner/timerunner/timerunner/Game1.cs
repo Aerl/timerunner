@@ -16,7 +16,7 @@ namespace timerunner
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public int platformIntersectY=0;
@@ -241,8 +241,9 @@ namespace timerunner
                 if (gameCounter > GAME_COUNTER_RESET )
                 {
                     gameSpeed += GAME_SPEED_INCREASE;
-                    runner.Interval = (float)(runner.Interval - INTERVAL_INCREASE);
+                    runner.walkingInterval = (float)(runner.Interval - INTERVAL_INCREASE);
                     gameCounter = 0;
+                    runner.fireballEnergyIncrease += .00025;
                 }
             }
 
@@ -435,7 +436,10 @@ namespace timerunner
 
             foreach (Platform platform in platforms)
                 platform.Draw(this.spriteBatch);
-            
+
+            fireballEnergyBar.Draw(this.spriteBatch,graphics,runner.fireballEnergyPercentage);
+            HelpClass.CreateRunnerRectangle(runner);
+
             if (monsterVisible == true)
             {
                 monsterOne.Draw(this.spriteBatch);
@@ -451,9 +455,6 @@ namespace timerunner
                 thirdMonster.Draw(this.spriteBatch);
             }
 
-            
-
-            fireballEnergyBar.Draw(this.spriteBatch,graphics,runner.fireballEnergyPercentage);
 
             //Kimi: For debug purpose
             //spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
@@ -526,6 +527,11 @@ namespace timerunner
                     GenerateRandomMonster(ref monsterOne, ref monsterVisible);
                 }
             }
+
+            //if (monsterVisible == false)
+            //    GenerateRandomMonster(ref monsterOne, ref monsterVisible);
+
+
             if (randomStarter>=300 && secondMonsterVisible == false && runner.score>secondMonsterScore)
             {
                 Random r = new Random();

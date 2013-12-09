@@ -14,7 +14,13 @@ namespace timerunner
         //Variables
         public const float MOVE_UP = -14;
         public float MOVE_DOWN =14; 
-        public int MAX_JUMP_HEIGHT = 300; 
+        public int MAX_JUMP_HEIGHT = 300;
+        public float walkingInterval = .2f;
+        public float meleeInterval = .06f;
+        public int widthOfSprite = 101;
+        public int heightOfSprite = 120;
+
+        InputManager im = new InputManager();
 
         public bool intersects;
 
@@ -24,7 +30,7 @@ namespace timerunner
         public float score = 0;
         
         //fireball
-        const double fireballEnergyIncrease = .004;
+        public double fireballEnergyIncrease = .004;
         public double fireballEnergyPercentage = 0;
         public List<Fireball> mFireballs = new List<Fireball>();
         private Texture2D Fire;
@@ -47,16 +53,16 @@ namespace timerunner
         public Runner()
             : base()
         {
-            Animations.Add("walking", new Animation(new Vector2(0, 0), 44, 80, 0, 0, 7));
-            Animations.Add("fire", new Animation(new Vector2(0, 200), 44, 80, 0, 0, 0));
-            Animations.Add("swordAttack", new Animation(new Vector2(0, 80), 95, 120, 0, 0, 4));
+            Animations.Add("walking", new Animation(new Vector2(0, 0), widthOfSprite, heightOfSprite, 0, 0, 7));
+            Animations.Add("fire", new Animation(new Vector2(0, heightOfSprite*2), widthOfSprite, heightOfSprite, 0, 0, 0));
+            Animations.Add("swordAttack", new Animation(new Vector2(0, heightOfSprite), widthOfSprite, heightOfSprite, 0, 0, 4));
             Position = new Vector2(120, 170);
             CurrentAnimation = "walking";
         }
 
         public override void LoadContent()
         {
-            Sprite = Game1.Instance.Content.Load<Texture2D>("RunSprites1");
+            Sprite = Game1.Instance.Content.Load<Texture2D>("KnightSprites");
             Fire = Game1.Instance.Content.Load<Texture2D>("Fireball");
             shootSound = Game1.Instance.Content.Load<SoundEffect>("Effect");
             base.LoadContent();
@@ -65,29 +71,24 @@ namespace timerunner
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) 
         {
             score++;
-            KeyboardState kState = Keyboard.GetState();
+            im.SetCurrentInputState();
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float speed = 200.0f;
             Animating = true;
 
-            if (kState.IsKeyDown(Keys.Q))
+            if (SwordAttack)
             {
-                CurrentAnimation = "walking";
-                Animating = true;
+                Interval = meleeInterval;
+                CurrentAnimation = "swordAttack";
             }
             else
             {
+                Interval = walkingInterval;
                 CurrentAnimation = "walking";
-                Animating = true;
             }
 
-            if (SwordAttack)
-            {
-                CurrentAnimation = "swordAttack";
-            }
-
-            UpdateFireball(gameTime, kState);
-            UpdateState(intersects, kState);
+            UpdateFireball(gameTime);
+            UpdateState(intersects);
             base.Update(gameTime);
 
             //Controls how many fireballs you can shoot
@@ -101,11 +102,11 @@ namespace timerunner
             {
                 currentState = State.Die;
             }
-            PreviousKeyboardState = kState;
+            im.SetAsPreviousInputState();
             
         }
 
-        private void UpdateState(bool onPlatform, KeyboardState aCurrentKeyboardState)
+        private void UpdateState(bool onPlatform)
         {
             if (currentState == State.Falling)
             {
@@ -119,7 +120,7 @@ namespace timerunner
  
             if (currentState == State.Walking)
             {
-                if (aCurrentKeyboardState.IsKeyDown(Keys.Up) == true)
+                if (PressedJump())
                 {
                     startJumpPosition = Position.Y;
                     currentState = State.Jumping;
@@ -141,40 +142,44 @@ namespace timerunner
 
             if (SwordAttack)
             {
-                if (meleeCounter > MELEE_TIME)
+                
+
+                if (currentFrame == 4)
                 {
                     SwordAttack = false;
                 }
-                else
-                {
-                    meleeCounter++;
-                }
+                    
             }
             else
             {
-                if (aCurrentKeyboardState.IsKeyDown(Keys.A) == true)
+                if (PressedMelee())
                 {
-                    SwordAttack = true;
-                    meleeCounter = 0;
+                    if (fireballEnergyPercentage > .6)
+                    {
+                        fireballEnergyPercentage -= .6;
+                        currentFrame = 0;
+                        SwordAttack = true;
+                        meleeCounter = 0;
+                    }
                 }
             }
         }
 
-        private void UpdateFireball(GameTime theGameTime, KeyboardState aCurrentKeyboardState)
+        private void UpdateFireball(GameTime theGameTime)
         {
             foreach (Fireball aFireball in mFireballs)
             {
                 aFireball.Update(theGameTime);
             }
 
-            if (aCurrentKeyboardState.IsKeyDown(Keys.Space) && PreviousKeyboardState.IsKeyDown(Keys.Space) == false)
+            if (PressedFireball())
             {
-                if (fireballEnergyPercentage > .25)
+                if (fireballEnergyPercentage > .3)
                 {
                     ShootFireball();
                     //CurrentAnimation = "fire";
                     shootSound.Play();
-                    fireballEnergyPercentage -= .25;
+                    fireballEnergyPercentage -= .3;
                 }
             }
         }
@@ -202,6 +207,21 @@ namespace timerunner
                     new Vector2(1,1), new Vector2(2, 0));
                 mFireballs.Add(aFireball);
             }
+        }
+
+        public bool PressedJump()
+        {
+            return im.IsPressed(Keys.Up, Buttons.A);
+        }
+
+        public bool PressedFireball()
+        {
+            return im.IsPressed(Keys.Space, Buttons.B);
+        }
+
+        public bool PressedMelee()
+        {
+            return im.IsPressed(Keys.A, Buttons.X);
         }
     }
 }

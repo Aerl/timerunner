@@ -244,3 +244,6 @@ C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Deb
 C:\Users\Aerl\Documents\GitHub\play\timerunner\timerunner\timerunner\obj\x86\Debug\timerunner.pdb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites.xnb
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\RunSprites1.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\KnightSprites.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platform2x.xnb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platformx.xnb

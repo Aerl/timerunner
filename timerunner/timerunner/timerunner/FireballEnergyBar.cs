@@ -45,9 +45,18 @@ namespace timerunner
             int width = 14;
             Texture2D rectangleTexture = new Texture2D(graphics.GraphicsDevice, width, height, true,SurfaceFormat.Color);// create the rectangle texture, ,but it will have no color! lets fix that
             Color[] color = new Color[width * height];//set the color to the amount of pixels in the textures
+            Color barColor;
+
+            if (fireballEnergyPercentage < .3)
+                barColor = Color.Blue;
+            else if (fireballEnergyPercentage < .6)
+                barColor = Color.Purple;
+            else
+                barColor = Color.Red;
+
             for (int i = 0; i < color.Length; i++)//loop through all the colors setting them to whatever values we want
             {
-                color[i] = Color.Red;
+                color[i] = barColor;
             }
             rectangleTexture.SetData(color);//set the color data on the texture
             return rectangleTexture;//return the texture

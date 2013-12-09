@@ -97,29 +97,56 @@ namespace timerunner
 
         public static bool IntersectRunner(Runner r1, Sprite r2)
         {
-            Rectangle runnerRectangle = new Rectangle((int)r1.Position.X-14, (int)r1.Position.Y-45, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
-            string walrus = "walrus";
+            int x = (int)r1.Position.X - 40;
+            int y = (int)r1.Position.Y - 60;
+            Rectangle runnerRectangle = new Rectangle(x, y, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
+
+
+            int row = 0;
+            int column = 0;
+
+            if (r1.CurrentAnimation == "walking")
+                row = 0;
+            else if (r1.CurrentAnimation == "melee")
+                row = 1;
+            else if (r1.CurrentAnimation == "fire")
+                row = 2;
+            else if (r1.CurrentAnimation == "jump")
+                row = 3;
+
+            column = r1.currentFrame;
+            Texture2D rectangleTexture = new Texture2D(Game1.Instance.GraphicsDevice, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height, true, SurfaceFormat.Color);
 
             int arrayLength = r1.Animations[r1.CurrentAnimation].Width * r1.Animations[r1.CurrentAnimation].Height;
 
-             Color[] fullTextureData;
-             Color[] specificTextureData = new Color[arrayLength];
+            Color[] fullTextureData;
+            Color[] specificTextureData = new Color[arrayLength];
+            Color[] halfTextureData;
 
-             fullTextureData = new Color[r1.Sprite.Width * r1.Sprite.Height];
-             r1.Sprite.GetData(fullTextureData);
+            fullTextureData = new Color[r1.Sprite.Width * r1.Sprite.Height];
+            r1.Sprite.GetData(fullTextureData);
 
-            for(int i=r1.currentFrame * arrayLength; i< (r1.currentFrame+1) * arrayLength; i++)
+            for (int i = 0; i < r1.Animations[r1.CurrentAnimation].Height; i++)
             {
-                specificTextureData[i - r1.currentFrame * arrayLength] = fullTextureData[i];
+                for (int j = 0; j < r1.Animations[r1.CurrentAnimation].Width; j++)
+                {
+                    int a = 825 * i + j + row * 825 * 120 + column * 101;
+                    int a1 = 101 * i + j;
+                    if (a1 == 101)
+                    {
+                        string walrus = "";
+                    }
+                    specificTextureData[a1] = fullTextureData[a];
+                }
             }
-            //r1.Sprite.GetData(
             
             return IntersectPixel(runnerRectangle,specificTextureData,r2.Size,r2.textureData);
         }
 
         public static bool IsRunnerOnTopOf(Runner r1, Platform platform)
         {
-            Rectangle runnerRectangle = new Rectangle((int)r1.Position.X, (int)r1.Position.Y - 50, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
+            Rectangle runnerRectangle = new Rectangle((int)r1.Position.X, (int)r1.Position.Y - 75, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height);
+
             return platform.Size.Top+10 >= runnerRectangle.Bottom && platform.Size.Top-10<= runnerRectangle.Bottom && runnerRectangle.Left >= platform.Size.Left && runnerRectangle.Right - runnerRectangle.Width <= platform.Size.Right;
         }
 
@@ -127,6 +154,52 @@ namespace timerunner
         {
             Rectangle monsterRectangle = monster.Size;
             return platform.Size.Top + 30 >= monsterRectangle.Bottom && platform.Size.Top - 30 <= monsterRectangle.Bottom && monsterRectangle.Left >= platform.Size.Left-50 && monsterRectangle.Right - monsterRectangle.Width <= platform.Size.Right;
+        }
+
+        public static void CreateRunnerRectangle(Runner r1)
+        {
+            int x = (int)r1.Position.X - 50;
+            int y = (int)r1.Position.Y - 60;
+
+            int row = 0;
+            int column = 0;
+
+            if (r1.CurrentAnimation == "walking")
+                row = 0;
+            else if (r1.CurrentAnimation == "swordAttack")
+                row = 1;
+            else if (r1.CurrentAnimation == "fire")
+                row = 2;
+            else if (r1.CurrentAnimation == "jump")
+                row = 3;
+
+            column = r1.currentFrame;
+            Texture2D rectangleTexture = new Texture2D(Game1.Instance.GraphicsDevice, r1.Animations[r1.CurrentAnimation].Width, r1.Animations[r1.CurrentAnimation].Height, true, SurfaceFormat.Color);
+
+            int arrayLength = r1.Animations[r1.CurrentAnimation].Width * r1.Animations[r1.CurrentAnimation].Height;
+
+            Color[] fullTextureData;
+            Color[] specificTextureData = new Color[arrayLength];
+            Color[] halfTextureData;
+
+            fullTextureData = new Color[r1.Sprite.Width * r1.Sprite.Height];
+            r1.Sprite.GetData(fullTextureData);
+
+            for (int i = 0; i < r1.Animations[r1.CurrentAnimation].Height; i++)
+            {
+                for (int j = 0; j < r1.Animations[r1.CurrentAnimation].Width; j++)
+                {
+                    int a = 825 * i + j + row * 825 * 120 + column * 101;
+                    int a1 = 101 * i + j;
+                    if (a1 == 101)
+                    {
+                        string walrus = "";
+                    }
+                    specificTextureData[a1] = fullTextureData[a];
+                }
+            }
+            rectangleTexture.SetData(specificTextureData);
+            Game1.Instance.spriteBatch.Draw(rectangleTexture, new Vector2(x, y), Color.White);
         }
 
         //We need to figure out changeInX and changeInY
