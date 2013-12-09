@@ -48,6 +48,8 @@ namespace timerunner
             : base()
         {
             Animations.Add("walking", new Animation(new Vector2(0, 0), 44, 80, 0, 0, 7));
+            Animations.Add("fire", new Animation(new Vector2(0, 200), 44, 80, 0, 0, 0));
+            Animations.Add("swordAttack", new Animation(new Vector2(0, 80), 95, 120, 0, 0, 4));
             Position = new Vector2(120, 170);
             CurrentAnimation = "walking";
         }
@@ -77,6 +79,11 @@ namespace timerunner
             {
                 CurrentAnimation = "walking";
                 Animating = true;
+            }
+
+            if (SwordAttack)
+            {
+                CurrentAnimation = "swordAttack";
             }
 
             UpdateFireball(gameTime, kState);
@@ -165,6 +172,7 @@ namespace timerunner
                 if (fireballEnergyPercentage > .25)
                 {
                     ShootFireball();
+                    //CurrentAnimation = "fire";
                     shootSound.Play();
                     fireballEnergyPercentage -= .25;
                 }

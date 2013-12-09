@@ -22,7 +22,6 @@ C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x
 C:\Users\Matt\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Fireball.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\walrus.xnb
-C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\knight.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Platform.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Effect.xnb
 C:\Users\Own\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.xnb
