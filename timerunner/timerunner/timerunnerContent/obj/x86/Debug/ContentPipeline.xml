@@ -380,6 +380,15 @@
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Sword.xnb</Output>
       <Time>2013-12-10T15:39:39.6607666-06:00</Time>
     </Item>
+    <Item>
+      <Source>WalrusSound.wav</Source>
+      <Name>WalrusSound</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\WalrusSound.xnb</Output>
+      <Time>2013-12-10T17:03:35.2947884-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

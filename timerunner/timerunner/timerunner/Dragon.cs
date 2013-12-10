@@ -14,6 +14,7 @@ namespace timerunner
     {
         string assetName = "dragon";
         string deadAssetName = "deadDragon";
+        string soundName = "WalrusSound";
         int moveLeft = -1;
         int moveRight = 1;
         int moveUp = -2;
@@ -24,7 +25,7 @@ namespace timerunner
         {
             Random r = new Random();
             Vector2 mStartingPosition = new Vector2(1200, r.Next(200,800));
-            Setup(speed, assetName, deadAssetName, moveLeft, moveRight,moveUp, moveDown, health, mStartingPosition, State.Flying);
+            Setup(speed, assetName, deadAssetName, moveLeft, moveRight, moveUp, moveDown, health, mStartingPosition, State.Flying, soundName);
         }
     }
 }

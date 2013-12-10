@@ -41,3 +41,4 @@ Content\Song.wma
 Content\Arial.xnb
 Content\Effect.xnb
 Content\Sword.xnb
+Content\WalrusSound.xnb

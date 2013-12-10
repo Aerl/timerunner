@@ -15,6 +15,7 @@ namespace timerunner
     {
         string assetName = "walrus";
         string deadAssetName = "deadWalrus";
+        string soundName = "WalrusSound";
         int moveLeft = -2;
         int moveRight = 1;
         int health = 2;
@@ -22,7 +23,7 @@ namespace timerunner
         public Walrus(int speed)
         {
             Vector2 mStartingPosition = new Vector2(900, 0);
-            Setup(speed, assetName, deadAssetName, moveLeft, moveRight, 0, 0, health, mStartingPosition, State.Falling);
+            Setup(speed, assetName, deadAssetName, moveLeft, moveRight, 0, 0, health, mStartingPosition, State.Falling, soundName);
         }
     }
 }

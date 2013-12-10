@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 
 
@@ -34,9 +35,12 @@ namespace timerunner
         public State mCurrentState;
         public bool intersects = false;
 
+        String deathSoundName;
+        SoundEffect deathSound;
+
         Vector2 mStartingPosition = new Vector2(900, 0);
 
-        public void Setup(int speed, string assetName, string deadAssetName, int moveLeft, int moveRight, int moveUp, int moveDown, int health, Vector2 startingPosition, State currentState)
+        public void Setup(int speed, string assetName, string deadAssetName, int moveLeft, int moveRight, int moveUp, int moveDown, int health, Vector2 startingPosition, State currentState, String soundName)
         {
             monster_AssetName = assetName;
             monster_DeadAssetName = deadAssetName;
@@ -48,6 +52,7 @@ namespace timerunner
             mCurrentState = currentState;
             mStartingPosition = startingPosition;
             Position = mStartingPosition;
+            deathSoundName = soundName;
 
             dyingHeight = 20;
         }
@@ -69,6 +74,7 @@ namespace timerunner
         public void LoadContent(ContentManager theContentManager)
         {
             content = theContentManager;
+            deathSound = theContentManager.Load<SoundEffect>(deathSoundName);
             base.LoadContent(theContentManager, monster_AssetName);
             Position = mStartingPosition;
         }
@@ -152,6 +158,7 @@ namespace timerunner
              if (health == 0)
              {
                  mCurrentState = State.Dead;
+                 deathSound.Play();
                  score += 1000;
                  texture = content.Load<Texture2D>(monster_DeadAssetName); 
              }  
