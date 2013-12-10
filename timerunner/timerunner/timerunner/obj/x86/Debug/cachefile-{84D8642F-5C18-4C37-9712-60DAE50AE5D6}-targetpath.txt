@@ -8,8 +8,8 @@ Content\night.xnb
 Content\nightwstars.xnb
 Content\sunrise.xnb
 Content\FireballEnergyBar.xnb
-Content\Platform2.xnb
-Content\Platform.xnb
+Content\Platform2x.xnb
+Content\Platformx.xnb
 Content\deadWalrus.xnb
 Content\level2a.xnb
 Content\level2b.xnb
@@ -33,10 +33,10 @@ Content\Dragon.xnb
 Content\deadDragon.xnb
 Content\RunSprites.xnb
 Content\RunSprites1.xnb
+Content\KnightSprites.xnb
+Content\Platform.xnb
+Content\Platform2.xnb
 Content\Song.xnb
 Content\Song.wma
 Content\Arial.xnb
 Content\Effect.xnb
-Content\KnightSprites.xnb
-Content\Platform2x.xnb
-Content\Platformx.xnb

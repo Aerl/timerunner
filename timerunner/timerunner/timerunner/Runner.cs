@@ -34,12 +34,10 @@ namespace timerunner
         public double fireballEnergyPercentage = 0;
         public List<Fireball> mFireballs = new List<Fireball>();
         private Texture2D Fire;
-        KeyboardState PreviousKeyboardState;
 
         //Melee
         public bool SwordAttack = false;
         const int MELEE_TIME = 15; // time attack lasts
-        int meleeCounter;
        
         //Sound
         SoundEffect shootSound;
@@ -56,6 +54,7 @@ namespace timerunner
             Animations.Add("walking", new Animation(new Vector2(0, 0), widthOfSprite, heightOfSprite, 0, 0, 7));
             Animations.Add("fire", new Animation(new Vector2(0, heightOfSprite*2), widthOfSprite, heightOfSprite, 0, 0, 0));
             Animations.Add("swordAttack", new Animation(new Vector2(0, heightOfSprite), widthOfSprite, heightOfSprite, 0, 0, 4));
+            Animations.Add("jump", new Animation(new Vector2(0, heightOfSprite*3), widthOfSprite, heightOfSprite, 0, 0, 0));
             Position = new Vector2(120, 170);
             CurrentAnimation = "walking";
         }
@@ -73,7 +72,6 @@ namespace timerunner
             score++;
             im.SetCurrentInputState();
             float timeDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            float speed = 200.0f;
             Animating = true;
 
             if (SwordAttack)
@@ -115,7 +113,11 @@ namespace timerunner
                     currentState = State.Walking;
                 }
                 else
+                {
+                    if (!SwordAttack)
+                    CurrentAnimation = "jump";
                     Position.Y += MOVE_DOWN;
+                }
             }
  
             if (currentState == State.Walking)
@@ -134,6 +136,8 @@ namespace timerunner
             if (currentState == State.Jumping)
             {
                 Position.Y += MOVE_UP;
+                if (!SwordAttack)
+                CurrentAnimation = "jump";
                 if (startJumpPosition - Position.Y > MAX_JUMP_HEIGHT)
                 {
                     currentState = State.Falling;
@@ -142,13 +146,10 @@ namespace timerunner
 
             if (SwordAttack)
             {
-                
-
                 if (currentFrame == 4)
                 {
                     SwordAttack = false;
-                }
-                    
+                }  
             }
             else
             {
@@ -159,7 +160,6 @@ namespace timerunner
                         fireballEnergyPercentage -= .6;
                         currentFrame = 0;
                         SwordAttack = true;
-                        meleeCounter = 0;
                     }
                 }
             }
@@ -186,7 +186,6 @@ namespace timerunner
 
         private void ShootFireball()
         {
-
             bool aCreateNew = true;
             foreach (Fireball aFireball in mFireballs)
             {
@@ -201,6 +200,7 @@ namespace timerunner
 
             if (aCreateNew == true)
             {
+                CurrentAnimation = "fire";
                 Fireball aFireball = new Fireball();
                 aFireball.LoadContent(Fire, "Fireball");
                 aFireball.Fire(Position + new Vector2(0,0),

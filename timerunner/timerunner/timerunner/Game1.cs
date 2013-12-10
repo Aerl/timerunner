@@ -252,10 +252,29 @@ namespace timerunner
                 this.Exit();
 
             HelpClass.UpdateMouse();
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture)))
+            if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture) || HelpClass.checkMouseClickOnSprite(endSprite.Position, endSprite.texture)))
             {
-                
+                runner.walkingInterval = 0.2f;
+                runner.Interval = 0.2f;
+                gameSpeed = 300;
+                runner.Position = new Vector2(120, 170);
+                currentPlatForm.Position = new Vector2(30, 400);
+                runner.score = 0;
                 runner.currentState = Runner.State.Falling;
+
+                if (monsterOne != null)
+                {
+                    monsterOne.mCurrentState = Monster.State.Dead;
+                }
+                if (secondMonster != null)
+                {
+                    secondMonster.mCurrentState = Monster.State.Dead;
+                }
+                if (thirdMonster != null)
+                {
+                    thirdMonster.mCurrentState = Monster.State.Dead;
+                }
+
                 gameState = GameState.Gaming;
                 startSprite.Position = new Vector2(-100, -100);
                 endSprite.Position = new Vector2(-100, -100);
@@ -273,26 +292,6 @@ namespace timerunner
                     platformIntersectY = platform.Size.Y;
                     break;
                 }
-
-                //Kimi: I added new hit detection method above for new Runner.cs character, but this one still work for old Player.cs character.
-                //if (HelpClass.TopHitDetection(platform, firstPlayerSprite))
-                //{
-                //    if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
-                //    {
-                //        // intersectsPlatform is set true if player onPlatform with any platform
-                //        intersectsPlatform = true;
-                //        platformIntersectY = platform.Size.Y;
-                //        break;
-                //    }
-                //}
-                //else
-                //    if (HelpClass.IntersectPixel(firstPlayerSprite.Size, firstPlayerSprite.textureData, platform.Size, platform.textureData))
-                //    {
-                //        // intersectsPlatform is set true if player onPlatform with any platform
-                //        GameOver();
-                //        break;
-                //    }
-
             }
 
             if (gameState == GameState.Gaming)
@@ -362,21 +361,14 @@ namespace timerunner
         {
               foreach (Platform platform in platforms)
               {
-                //if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
-                //{
-                //    // intersectsPlatform is set true if monster onPlatform with any platform
-                        //    monsterIntersectPlatform = true;
-                        //    break;
-                        //}
-
-                        if (HelpClass.IsMonsterInBounds(monsterTrial, platform))
+                    if (HelpClass.IsMonsterInBounds(monsterTrial, platform))
+                    {
+                        if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
                         {
-                            if (HelpClass.IntersectPixel(monsterTrial.Size, monsterTrial.textureData, platform.Size, platform.textureData))
-                            {
-                                monsterTrial.intersects = true;
-                                break;
-                            }
+                            monsterTrial.intersects = true;
+                            break;
                         }
+                    }
                     }
                     //use for if a fireball hits a monster
                     foreach (Fireball f in runner.mFireballs)
@@ -455,20 +447,7 @@ namespace timerunner
                 thirdMonster.Draw(this.spriteBatch);
             }
 
-
-            //Kimi: For debug purpose
-            //spriteBatch.DrawString(font, firstPlayerSprite.Position.ToString(), new Vector2(10, 10), Color.White);
-            //if (monsterVisible)
-            //{
-            //    spriteBatch.DrawString(font, monsterTrial.Position.ToString(), new Vector2(10, 50), Color.White);
-            //}
-
             spriteBatch.DrawString(font,"Score: " + runner.score.ToString(), new Vector2(10, 10), Color.White);
-            //spriteBatch.DrawString(font, "Game Speed: " + gameSpeed.ToString(), new Vector2(10, 50), Color.White);
-            //spriteBatch.DrawString(font, "Position: " + runner.Position.Y.ToString(), new Vector2(10, 30), Color.White);
-            //spriteBatch.DrawString(font, "State: " + runner.currentState.ToString(), new Vector2(10, 50), Color.White);
-            //spriteBatch.DrawString(font, "runner.intersects: " + (runner.intersects).ToString(), new Vector2(10, 70), Color.White);
-            //spriteBatch.DrawString(font, "runner.melee: " + (runner.SwordAttack).ToString(), new Vector2(10, 90), Color.White);
 
             startSprite.Draw(spriteBatch);
 
