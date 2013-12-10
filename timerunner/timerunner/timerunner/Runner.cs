@@ -38,6 +38,7 @@ namespace timerunner
         //Melee
         public bool SwordAttack = false;
         const int MELEE_TIME = 15; // time attack lasts
+        SoundEffect swordSound;
        
         //Sound
         SoundEffect shootSound;
@@ -64,6 +65,7 @@ namespace timerunner
             Sprite = Game1.Instance.Content.Load<Texture2D>("KnightSprites");
             Fire = Game1.Instance.Content.Load<Texture2D>("Fireball");
             shootSound = Game1.Instance.Content.Load<SoundEffect>("Effect");
+            swordSound = Game1.Instance.Content.Load<SoundEffect>("Sword");
             base.LoadContent();
         }
 
@@ -160,6 +162,7 @@ namespace timerunner
                         fireballEnergyPercentage -= .6;
                         currentFrame = 0;
                         SwordAttack = true;
+                        swordSound.Play();
                     }
                 }
             }
