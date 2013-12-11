@@ -14,7 +14,7 @@ namespace timerunner
     {
         string assetName = "dragon";
         string deadAssetName = "deadDragon";
-        string soundName = "WalrusSound";
+        string soundName = "DragonSound";
         int moveLeft = -1;
         int moveRight = 1;
         int moveUp = -2;

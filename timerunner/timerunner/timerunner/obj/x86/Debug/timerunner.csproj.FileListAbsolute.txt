@@ -255,3 +255,4 @@ C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\KnightSprites.xnb
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Sword.xnb
 C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\WalrusSound.xnb
+C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\DragonSound.xnb

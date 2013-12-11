@@ -42,3 +42,4 @@ Content\Arial.xnb
 Content\Effect.xnb
 Content\Sword.xnb
 Content\WalrusSound.xnb
+Content\DragonSound.xnb
