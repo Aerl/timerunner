@@ -268,7 +268,9 @@ namespace timerunner
             if (gameState == GameState.GameOver || gameState == GameState.Gamebegin)
             {
                 if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture) || HelpClass.checkMouseClickOnSprite(endSpriteScreen.Position, endSpriteScreen.texture) || PressedFireball()))
-                {
+                
+                    runner.fireballEnergyIncrease=.003;
+                    randomStarter = 0;
                     runner.fireballEnergyPercentage = 0;
                     runner.walkingInterval = 0.2f;
                     runner.Interval = 0.2f;
@@ -397,6 +399,7 @@ namespace timerunner
                     MediaPlayer.Play(currentSong);
                 }
             }
+            im.SetAsPreviousInputState();
             base.Update(gameTime);
         }
 
