@@ -344,16 +344,6 @@
       <Time>2013-12-10T15:39:00.1885089-06:00</Time>
     </Item>
     <Item>
-      <Source>Song.mp3</Source>
-      <Name>Song</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SongProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.xnb</Output>
-      <Extra>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song.wma</Extra>
-      <Time>2013-12-10T15:39:00.2195107-06:00</Time>
-    </Item>
-    <Item>
       <Source>Arial.spritefont</Source>
       <Name>Arial</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -397,6 +387,36 @@
       <Options>None</Options>
       <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\DragonSound.xnb</Output>
       <Time>2013-12-10T18:15:26.8683963-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Song1.mp3</Source>
+      <Name>Song1</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song1.xnb</Output>
+      <Extra>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song1.wma</Extra>
+      <Time>2013-12-10T18:48:12.5648277-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Song2.mp3</Source>
+      <Name>Song2</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song2.xnb</Output>
+      <Extra>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song2.wma</Extra>
+      <Time>2013-12-10T15:39:00.2195107-06:00</Time>
+    </Item>
+    <Item>
+      <Source>Song3.mp3</Source>
+      <Name>Song3</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song3.xnb</Output>
+      <Extra>C:\Users\Aerl\Documents\GitHub\timerunner\timerunner\timerunner\timerunner\bin\x86\Debug\Content\Song3.wma</Extra>
+      <Time>2013-12-10T18:45:43.4983016-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

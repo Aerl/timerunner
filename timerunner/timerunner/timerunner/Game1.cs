@@ -50,7 +50,10 @@ namespace timerunner
         Platform currentPlatForm, outScreenPlatForm;
 
         //Sound
-        Song backgroundSong;
+        Song backgroundSong1;
+        Song backgroundSong2;
+        Song backgroundSong3;
+        Song currentSong;
 
         //Animation
         float frameTimer;
@@ -213,9 +216,12 @@ namespace timerunner
             }
 
             //Load sound effect
-            backgroundSong = Content.Load<Song>("Song");
+            backgroundSong1 = Content.Load<Song>("Song1");
+            backgroundSong2 = Content.Load<Song>("Song2");
+            backgroundSong3 = Content.Load<Song>("Song3");
+            currentSong = backgroundSong1;
 
-            MediaPlayer.Play(backgroundSong);
+            MediaPlayer.Play(currentSong);
             MediaPlayer.IsRepeating = true;
         }
 
@@ -278,6 +284,8 @@ namespace timerunner
                 gameState = GameState.Gaming;
                 startSprite.Position = new Vector2(-100, -100);
                 endSprite.Position = new Vector2(-100, -100);
+
+               
             }
 
             // set intersectsPlatform to false befor testing
@@ -352,6 +360,22 @@ namespace timerunner
                 for (int i = 0; i < entities.Count; i++)
                 {
                     entities[i].Update(gameTime);
+                }
+
+                if (runner.score > secondMonsterScore && currentSong.Equals(backgroundSong1))
+                {
+                    MediaPlayer.Stop();
+                    currentSong = backgroundSong2;
+                    MediaPlayer.Play(currentSong);
+                }
+                else
+                {
+                    if (runner.score > thirdMonsterScore && !currentSong.Equals(backgroundSong3))
+                    {
+                        MediaPlayer.Stop();
+                        currentSong = backgroundSong3;
+                        MediaPlayer.Play(currentSong);
+                    }
                 }
             }
             base.Update(gameTime);
