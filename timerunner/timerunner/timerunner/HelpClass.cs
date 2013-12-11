@@ -121,7 +121,6 @@ namespace timerunner
 
             Color[] fullTextureData;
             Color[] specificTextureData = new Color[arrayLength];
-            Color[] halfTextureData;
 
             fullTextureData = new Color[r1.Sprite.Width * r1.Sprite.Height];
             r1.Sprite.GetData(fullTextureData);

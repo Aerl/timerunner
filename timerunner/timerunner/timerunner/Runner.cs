@@ -30,10 +30,11 @@ namespace timerunner
         public float score = 0;
         
         //fireball
-        public double fireballEnergyIncrease = .004;
+        public double fireballEnergyIncrease = .003;
         public double fireballEnergyPercentage = 0;
         public List<Fireball> mFireballs = new List<Fireball>();
         private Texture2D Fire;
+        private int fireballCounter = 0;
 
         //Melee
         public bool SwordAttack = false;
@@ -56,7 +57,7 @@ namespace timerunner
             Animations.Add("fire", new Animation(new Vector2(0, heightOfSprite*2), widthOfSprite, heightOfSprite, 0, 0, 0));
             Animations.Add("swordAttack", new Animation(new Vector2(0, heightOfSprite), widthOfSprite, heightOfSprite, 0, 0, 4));
             Animations.Add("jump", new Animation(new Vector2(0, heightOfSprite*3), widthOfSprite, heightOfSprite, 0, 0, 0));
-            Position = new Vector2(120, 170);
+            Position = new Vector2(220, 170);
             CurrentAnimation = "walking";
         }
 
@@ -83,8 +84,15 @@ namespace timerunner
             }
             else
             {
+                if (fireballCounter > 10 && fireballCounter < 30)
+                {
+                    CurrentAnimation = "fire";
+                    fireballCounter++;
+                }
+                else
+                    CurrentAnimation = "walking";
+
                 Interval = walkingInterval;
-                CurrentAnimation = "walking";
             }
 
             UpdateFireball(gameTime);
@@ -117,7 +125,14 @@ namespace timerunner
                 else
                 {
                     if (!SwordAttack)
-                    CurrentAnimation = "jump";
+                        CurrentAnimation = "jump";
+                    
+                    if (fireballCounter > 10 && fireballCounter < 30)
+                    {
+                        CurrentAnimation = "fire";
+                        fireballCounter++;
+                    }
+
                     Position.Y += MOVE_DOWN;
                 }
             }
@@ -180,7 +195,8 @@ namespace timerunner
                 if (fireballEnergyPercentage > .3)
                 {
                     ShootFireball();
-                    //CurrentAnimation = "fire";
+                    fireballCounter = 11;
+                    CurrentAnimation = "fire";
                     shootSound.Play();
                     fireballEnergyPercentage -= .3;
                 }
@@ -195,7 +211,7 @@ namespace timerunner
                 if (aFireball.Visible == false)
                 {
                     aCreateNew = false;
-                    aFireball.Fire(Position + new Vector2(0,0),
+                    aFireball.Fire(Position + new Vector2(-10,20),
                     new Vector2(1,1), new Vector2(2, 0));
                     break;
                 }
@@ -206,7 +222,7 @@ namespace timerunner
                 CurrentAnimation = "fire";
                 Fireball aFireball = new Fireball();
                 aFireball.LoadContent(Fire, "Fireball");
-                aFireball.Fire(Position + new Vector2(0,0),
+                aFireball.Fire(Position + new Vector2(-10,20),
                     new Vector2(1,1), new Vector2(2, 0));
                 mFireballs.Add(aFireball);
             }

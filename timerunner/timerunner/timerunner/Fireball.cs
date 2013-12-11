@@ -10,7 +10,7 @@ namespace timerunner
 {
     class Fireball : Sprite
     {
-        const int MAX_DISTANCE = 500;
+        const int MAX_DISTANCE = 600;
         float scale = 0.3f;
 
         public bool Visible = false;

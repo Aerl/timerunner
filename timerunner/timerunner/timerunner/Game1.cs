@@ -27,7 +27,8 @@ namespace timerunner
         HorizontallyScrollingBackground mScrollingBackgroundsky;
         randombackground mScrollingBackgroundlandscape;
         randombackground mScrollingBackgroundfront;
-
+        Vector2 scoreLocation = new Vector2(-100, -100);
+        InputManager im = new InputManager();
         Runner runner;
 
         //Monster variables
@@ -43,7 +44,8 @@ namespace timerunner
         FireballEnergyBar fireballEnergyBar;
         List<Platform> platforms = new List<Platform>();
         SpriteFont font;
-        Sprite startSprite, endSprite;
+        SpriteFont font2;
+        Sprite startSprite, endSprite, endSpriteScreen;
         Random randomMonsterNumber = new Random();
 
         //PlatForm 
@@ -133,16 +135,17 @@ namespace timerunner
 
             //Initialize letter sprites
             startSprite = new Sprite();
-            startSprite.AssetName = "start";
+            startSprite.AssetName = "startscreen";
             endSprite = new Sprite();
             endSprite.AssetName = "gameover";
+            endSpriteScreen = new Sprite();
+            endSpriteScreen.AssetName = "gameoverScreen";
 
             // Initialize Animation Properties
             frameTimer = 0;
             frameInterval = 80f;
 
             runner = new Runner();
-            runner.Position.X += 100;
             entities.Add(runner);
 
             base.Initialize();
@@ -159,11 +162,14 @@ namespace timerunner
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("Arial");
+            font2 = Content.Load<SpriteFont>("Monotype Corsiva");
 
-            startSprite.texture = Content.Load<Texture2D>("start");
-            startSprite.Position = new Vector2(WINDOW_WIDTH / 2 - startSprite.texture.Width / 2, WINDOW_HEIGHT / 2);
+            startSprite.texture = Content.Load<Texture2D>("startscreen");
+            startSprite.Position = new Vector2(0,0);
             endSprite.texture = Content.Load<Texture2D>("gameover");
             endSprite.Position = new Vector2(-100, -100);
+            endSpriteScreen.texture = Content.Load<Texture2D>(endSpriteScreen.AssetName);
+            endSpriteScreen.Position = new Vector2(-1000, -1000);
 
             
             fireballEnergyBar.LoadContent(this.Content);
@@ -241,13 +247,14 @@ namespace timerunner
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            im.SetCurrentInputState();
             if (gameState == GameState.Gaming && gameSpeed <= MAX_GAME_SPEED)
             {
                 gameCounter++;
                 if (gameCounter > GAME_COUNTER_RESET )
                 {
                     gameSpeed += GAME_SPEED_INCREASE;
-                    runner.walkingInterval = (float)(runner.Interval - INTERVAL_INCREASE);
+                    runner.walkingInterval = (float)(runner.walkingInterval - INTERVAL_INCREASE);
                     gameCounter = 0;
                     runner.fireballEnergyIncrease += .00025;
                 }
@@ -256,36 +263,46 @@ namespace timerunner
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            
             HelpClass.UpdateMouse();
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture) || HelpClass.checkMouseClickOnSprite(endSprite.Position, endSprite.texture)))
+            if (gameState == GameState.GameOver || gameState == GameState.Gamebegin)
             {
-                runner.walkingInterval = 0.2f;
-                runner.Interval = 0.2f;
-                gameSpeed = 300;
-                runner.Position = new Vector2(120, 170);
-                currentPlatForm.Position = new Vector2(30, 400);
-                runner.score = 0;
-                runner.currentState = Runner.State.Falling;
-
-                if (monsterOne != null)
+                if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture) || HelpClass.checkMouseClickOnSprite(endSpriteScreen.Position, endSpriteScreen.texture) || PressedFireball()))
                 {
-                    monsterOne.mCurrentState = Monster.State.Dead;
-                }
-                if (secondMonster != null)
-                {
-                    secondMonster.mCurrentState = Monster.State.Dead;
-                }
-                if (thirdMonster != null)
-                {
-                    thirdMonster.mCurrentState = Monster.State.Dead;
-                }
+                    runner.fireballEnergyPercentage = 0;
+                    runner.walkingInterval = 0.2f;
+                    runner.Interval = 0.2f;
+                    gameSpeed = 300;
+                    runner.Position = new Vector2(220, 170);
+                    currentPlatForm.Position = new Vector2(30, 400);
+                    outScreenPlatForm.Position = new Vector2(1300, -350);
+                    endSpriteScreen.Position = new Vector2(-1000, -1000);
+                    scoreLocation = new Vector2(-100, -100);
+                    runner.score = 0;
+                    runner.currentState = Runner.State.Falling;
 
-                gameState = GameState.Gaming;
-                startSprite.Position = new Vector2(-100, -100);
-                endSprite.Position = new Vector2(-100, -100);
+                    if (monsterOne != null)
+                    {
+                        monsterOne.Position = new Vector2(0, 1500);
+                        monsterVisible = false;
+                    }
+                    if (secondMonster != null)
+                    {
+                        secondMonster.Position = new Vector2(0, 1500);
+                        monsterVisible = false;
+                    }
+                    if (thirdMonster != null)
+                    {
+                        thirdMonster.Position = new Vector2(0, 1500);
+                        monsterVisible = false;
+                    }
 
-               
+                    gameState = GameState.Gaming;
+                    startSprite.Position = new Vector2(-1000, -1000);
+                    endSprite.Position = new Vector2(-100, -100);
+
+
+                }
             }
 
             // set intersectsPlatform to false befor testing
@@ -330,7 +347,6 @@ namespace timerunner
                      platform.Update(gameTime);
 
                 //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
-                //Update the scrolling backround. You can scroll to the left or to the right by changing the scroll direction
                 mScrollingBackgroundsky.Update(gameTime, 160, HorizontallyScrollingBackground.HorizontalScrollDirection.Left);
                 mScrollingBackgroundlandscape.Update(gameTime, 210, randombackground.HorizontalScrollDirection.Left);
                 mScrollingBackgroundfront.Update(gameTime, 260, randombackground.HorizontalScrollDirection.Left);
@@ -368,14 +384,17 @@ namespace timerunner
                     currentSong = backgroundSong2;
                     MediaPlayer.Play(currentSong);
                 }
-                else
+                else if (runner.score > thirdMonsterScore && !currentSong.Equals(backgroundSong3))
                 {
-                    if (runner.score > thirdMonsterScore && !currentSong.Equals(backgroundSong3))
-                    {
                         MediaPlayer.Stop();
                         currentSong = backgroundSong3;
                         MediaPlayer.Play(currentSong);
-                    }
+                }
+                else if (!currentSong.Equals(backgroundSong1) && runner.score < secondMonsterScore)
+                {
+                    MediaPlayer.Stop();
+                    currentSong = backgroundSong1;
+                    MediaPlayer.Play(currentSong);
                 }
             }
             base.Update(gameTime);
@@ -434,8 +453,9 @@ namespace timerunner
         private void GameOver()
         {
             gameState = GameState.GameOver;
-            endSprite.Position = new Vector2(WINDOW_WIDTH / 2 - endSprite.texture.Width / 2, WINDOW_HEIGHT / 2);
-            //startSprite.Position = new Vector2(WINDOW_WIDTH / 2 - startSprite.texture.Width / 2, WINDOW_HEIGHT / 2 - 40);
+            endSpriteScreen.Position = new Vector2(WINDOW_WIDTH / 2, 0);
+            scoreLocation = new Vector2(WINDOW_WIDTH / 2 + endSpriteScreen.texture.Width / 2 - 30, WINDOW_HEIGHT / 2 + 80);
+            
         }
 
         /// <summary>
@@ -472,10 +492,13 @@ namespace timerunner
             }
 
             spriteBatch.DrawString(font,"Score: " + runner.score.ToString(), new Vector2(10, 10), Color.White);
+            
 
             startSprite.Draw(spriteBatch);
 
+            endSpriteScreen.Draw(spriteBatch);
             endSprite.Draw(spriteBatch);
+            spriteBatch.DrawString(font2, "Score: " + runner.score.ToString(), scoreLocation, Color.Black);
 
             for (int i = 0; i < entities.Count; i++)
             {
@@ -531,9 +554,6 @@ namespace timerunner
                 }
             }
 
-            //if (monsterVisible == false)
-            //    GenerateRandomMonster(ref monsterOne, ref monsterVisible);
-
 
             if (randomStarter>=300 && secondMonsterVisible == false && runner.score>secondMonsterScore)
             {
@@ -553,6 +573,20 @@ namespace timerunner
                     GenerateRandomMonster(ref thirdMonster, ref thirdMonsterVisible);
                 }
             }
+        }
+        public bool PressedJump()
+        {
+            return im.IsPressed(Keys.Up, Buttons.A);
+        }
+
+        public bool PressedFireball()
+        {
+            return im.IsPressed(Keys.Space, Buttons.B);
+        }
+
+        public bool PressedMelee()
+        {
+            return im.IsPressed(Keys.A, Buttons.X);
         }
     }
 

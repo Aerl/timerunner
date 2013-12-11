@@ -47,3 +47,6 @@ Content\Song2.xnb
 Content\Song2.wma
 Content\Song3.xnb
 Content\Song3.wma
+Content\startscreen.xnb
+Content\gameoverScreen.xnb
+Content\Monotype Corsiva.xnb
