@@ -59,13 +59,13 @@ namespace timerunner
                 if (mRightMostSprite == null)
                 {
                     //Position the first Background sprite in line at the (0,0) position
-                    aBackgroundSprite.Position = new Vector2(mViewport.X, mViewport.Y);
+                    aBackgroundSprite.Position = new Vector2(mViewport.X-1, mViewport.Y);
                     mLeftMostSprite = aBackgroundSprite;
                 }
                 else
                 {
                     //Position the sprite after the last sprite in line
-                    aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width, mViewport.Y);
+                    aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width-1, mViewport.Y);
                 }
 
                 //Set the sprite as the last one in line
@@ -127,7 +127,7 @@ namespace timerunner
                 {
                     if (aBackgroundSprite.Position.X < mViewport.X - aBackgroundSprite.Size.Width)
                     {
-                        aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width, mViewport.Y);
+                        aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width - 1, mViewport.Y);
                         mRightMostSprite = aBackgroundSprite;
                     }
                 }
@@ -140,7 +140,7 @@ namespace timerunner
                 {
                     if (aBackgroundSprite.Position.X > mViewport.X + mViewport.Width)
                     {
-                        aBackgroundSprite.Position = new Vector2(mLeftMostSprite.Position.X - mLeftMostSprite.Size.Width, mViewport.Y);
+                        aBackgroundSprite.Position = new Vector2(mLeftMostSprite.Position.X - mLeftMostSprite.Size.Width-1, mViewport.Y);
                         mLeftMostSprite = aBackgroundSprite;
                     }
                 }

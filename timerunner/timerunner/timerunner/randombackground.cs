@@ -12,6 +12,7 @@ namespace timerunner
 {
     class randombackground : HorizontallyScrollingBackground
     {
+        
 
         public List<Sprite> allSprites;
         Random r = new Random();
@@ -23,6 +24,9 @@ namespace timerunner
 
         public override void LoadContent(ContentManager theContentManager)
         {
+            //Load High Scores
+
+
             //Clear the Sprites currently stored as the left and right ends of the chain
             mRightMostSprite = null;
             mLeftMostSprite = null;
@@ -34,6 +38,7 @@ namespace timerunner
             //and load their content and position them.
             foreach (Sprite aBackgroundSprite in mBackgroundSprites)
             {
+
                 //Load the sprite's content and apply it's scale, the scale is calculate by figuring
                 //out how far the sprite needs to be stretech to make it fill the height of the viewport
                 aBackgroundSprite.LoadContent(theContentManager, aBackgroundSprite.AssetName);
@@ -50,13 +55,13 @@ namespace timerunner
                 if (mRightMostSprite == null)
                 {
                     //Position the first Background sprite in line at the (0,0) position
-                    aBackgroundSprite.Position = new Vector2(mViewport.X, mViewport.Y);
+                    aBackgroundSprite.Position = new Vector2(mViewport.X-1, mViewport.Y);
                     mLeftMostSprite = aBackgroundSprite;
                 }
                 else
                 {
                     //Position the sprite after the last sprite in line
-                    aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width, mViewport.Y);
+                    aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width-1, mViewport.Y);
                 }
 
                 //Set the sprite as the last one in line
@@ -118,7 +123,7 @@ namespace timerunner
                         aBackgroundSprite.Size = allSprites[index].Size;
                         aBackgroundSprite.texture = allSprites[index].texture;
                         aBackgroundSprite.textureData = allSprites[index].textureData;
-                        aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width, mViewport.Y);
+                        aBackgroundSprite.Position = new Vector2(mRightMostSprite.Position.X + mRightMostSprite.Size.Width-1, mViewport.Y);
                         mRightMostSprite = aBackgroundSprite;
                     }
                 }
@@ -131,7 +136,7 @@ namespace timerunner
                 {
                     if (aBackgroundSprite.Position.X > mViewport.X + mViewport.Width)
                     {
-                        aBackgroundSprite.Position = new Vector2(mLeftMostSprite.Position.X - mLeftMostSprite.Size.Width, mViewport.Y);
+                        aBackgroundSprite.Position = new Vector2(mLeftMostSprite.Position.X - mLeftMostSprite.Size.Width-1, mViewport.Y);
                         mLeftMostSprite = aBackgroundSprite;
                     }
                 }

@@ -9,7 +9,6 @@ Content\nightwstars.xnb
 Content\sunrise.xnb
 Content\FireballEnergyBar.xnb
 Content\Platform2x.xnb
-Content\Platformx.xnb
 Content\deadWalrus.xnb
 Content\level2a.xnb
 Content\level2b.xnb
@@ -36,7 +35,10 @@ Content\RunSprites1.xnb
 Content\KnightSprites.xnb
 Content\Platform.xnb
 Content\Platform2.xnb
+Content\startscreen.xnb
+Content\gameoverScreen.xnb
 Content\Arial.xnb
+Content\Monotype Corsiva.xnb
 Content\Effect.xnb
 Content\Sword.xnb
 Content\WalrusSound.xnb
@@ -44,9 +46,7 @@ Content\DragonSound.xnb
 Content\Song1.xnb
 Content\Song2.xnb
 Content\Song3.xnb
-Content\startscreen.xnb
-Content\gameoverScreen.xnb
-Content\Monotype Corsiva.xnb
+Content\PlatformNew.xnb
 Content\Song1.wma
 Content\Song2.wma
 Content\Song3.wma

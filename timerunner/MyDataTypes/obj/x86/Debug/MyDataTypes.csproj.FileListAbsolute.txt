@@ -1,0 +1,6 @@
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\bin\x86\Debug\MyDataTypes.dll
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\bin\x86\Debug\MyDataTypes.pdb
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\obj\x86\Debug\MyDataTypes.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\obj\x86\Debug\MyDataTypes.dll
+C:\Users\Matt\Documents\GitHub\timerunner\timerunner\MyDataTypes\obj\x86\Debug\MyDataTypes.pdb

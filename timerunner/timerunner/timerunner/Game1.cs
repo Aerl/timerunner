@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Xml.Linq;
+using System.IO;
 
 namespace timerunner
 {
@@ -16,12 +18,15 @@ namespace timerunner
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public int platformIntersectY=0;
         float randomStarter = 0;
         
+        //Scores
+        public SortedList<double, float> topScores = new SortedList<double, float>();
 
         //Create a Horizontally scrolling background
         HorizontallyScrollingBackground mScrollingBackgroundsky;
@@ -125,6 +130,7 @@ namespace timerunner
         /// </summary>
         protected override void Initialize()
         {
+            LoadScores();
             fireballEnergyBar = new FireballEnergyBar();
 
             // Initialize Platforms
@@ -150,6 +156,8 @@ namespace timerunner
 
             base.Initialize();
         }
+
+
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -268,8 +276,8 @@ namespace timerunner
             if (gameState == GameState.GameOver || gameState == GameState.Gamebegin)
             {
                 if ((GamePad.GetState(PlayerIndex.One).Buttons.BigButton == ButtonState.Pressed || HelpClass.checkMouseClickOnSprite(startSprite.Position, startSprite.texture) || HelpClass.checkMouseClickOnSprite(endSpriteScreen.Position, endSpriteScreen.texture) || PressedFireball()))
-                
-                    runner.fireballEnergyIncrease=.003;
+                {
+                    runner.fireballEnergyIncrease = .003;
                     randomStarter = 0;
                     runner.fireballEnergyPercentage = 0;
                     runner.walkingInterval = 0.2f;
@@ -302,8 +310,6 @@ namespace timerunner
                     gameState = GameState.Gaming;
                     startSprite.Position = new Vector2(-1000, -1000);
                     endSprite.Position = new Vector2(-100, -100);
-
-
                 }
             }
 
@@ -456,9 +462,11 @@ namespace timerunner
         private void GameOver()
         {
             gameState = GameState.GameOver;
+
+            AddScore(runner.score);
             endSpriteScreen.Position = new Vector2(WINDOW_WIDTH / 2, 0);
-            scoreLocation = new Vector2(WINDOW_WIDTH / 2 + endSpriteScreen.texture.Width / 2 - 30, WINDOW_HEIGHT / 2 + 80);
-            
+            scoreLocation = new Vector2(WINDOW_WIDTH / 2 + endSpriteScreen.texture.Width / 2 - 30, WINDOW_HEIGHT / 2 - 70);     
+            WriteScores();
         }
 
         /// <summary>
@@ -502,6 +510,12 @@ namespace timerunner
             endSpriteScreen.Draw(spriteBatch);
             endSprite.Draw(spriteBatch);
             spriteBatch.DrawString(font2, "Score: " + runner.score.ToString(), scoreLocation, Color.Black);
+            spriteBatch.DrawString(font2, "Top Scores: ", new Vector2(scoreLocation.X,scoreLocation.Y + 50), Color.Black);
+            spriteBatch.DrawString(font2, "-------------- ", new Vector2(scoreLocation.X, scoreLocation.Y + 60), Color.Black);
+            for (int i = 0; i < topScores.Values.Count; i++)
+            {
+                spriteBatch.DrawString(font2, (i+1) + ") " + topScores.Values[i], new Vector2(scoreLocation.X, scoreLocation.Y + 45 + (i+1)*40), Color.Black);
+            }
 
             for (int i = 0; i < entities.Count; i++)
             {
@@ -577,6 +591,58 @@ namespace timerunner
                 }
             }
         }
+        private void LoadScores()
+        {
+            try
+            {
+                XDocument doc = XDocument.Load("Highscores.xml");
+
+                IEnumerable<float> list = from score in doc.Descendants("Score")
+                                          select Convert.ToSingle(score.Value);
+
+                foreach (float score in list)
+                {
+                    AddScore(score);
+                }
+            }
+            catch
+            {
+                XDocument doc = new XDocument(new XElement("HighScore"));
+                doc.Save("HighScores.xml");
+            }
+                             
+        }
+
+        private void AddScore(float score)
+        {
+            double key = Convert.ToDouble(-score);
+            while (topScores.ContainsKey(key))
+            {
+                key = key - .1;
+            }
+            topScores.Add(key, score+1);
+        }
+
+        private void WriteScores()
+        {
+            while (topScores.Count > 5)
+            {
+                topScores.RemoveAt(5);
+            }
+            //System.IO.Stream stream = TitleContainer.OpenStream("Highscores.xml");
+            XDocument doc = XDocument.Load("Highscores.xml");
+            doc.Root.RemoveAll();
+            XElement highScoresElement = new XElement("Highscores");
+
+            foreach (int score in topScores.Values)
+            {
+                highScoresElement.Add(new XElement("Score", score));
+            }
+            doc.Root.Add(highScoresElement);
+            doc.Save("Highscores.xml");
+
+        }
+
         public bool PressedJump()
         {
             return im.IsPressed(Keys.Up, Buttons.A);

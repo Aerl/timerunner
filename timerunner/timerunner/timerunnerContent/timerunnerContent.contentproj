@@ -120,8 +120,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platformx.png">
-      <Name>Platformx</Name>
+    <Compile Include="Platform.png">
+      <Name>Platform</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -278,8 +278,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Platform.png">
-      <Name>Platform</Name>
+    <Compile Include="PlatformNew.png">
+      <Name>PlatformNew</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
